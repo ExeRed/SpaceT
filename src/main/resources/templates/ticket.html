@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Ticket</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/ticket.css">
+  <link rel="icon" type="image/png" href="../static/images/logo.png">
+</head>
+<body>
+  <div class="header">
+    <a href="http://localhost:8081/main">
+      <img class="headlogo" src="../static/images/logo.png" alt="">
+    </a>
+    <button class="btn return" onclick="window.location.href='http://localhost:8081/returning'">RETURN</button>
+    <button class="btn about" onclick="window.location.href='http://localhost:8081/aboutus'">ABOUT US</button>
+    <button class="btn book" onclick="window.location.href='http://localhost:8081/purchasing'">BOOK NOW</button>
+
+    <a href="https://www.facebook.com/">
+      <img class="btn fb" src="../static/images/FB.png" alt="">
+    </a>
+
+    <a href="https://www.instagram.com/valentin_bibik/">
+      <img class="btn inst" src="../static/images/inst.png" alt="">
+    </a>
+
+    <a href="https://www.youtube.com/">
+      <img class="btn yt" src="../static/images/YT.png" alt="">
+    </a>
+
+  </div>
+
+  <div class="text-ticket">
+    <p>Dear Reader, congratulations! <br> <br>
+
+      You have just booked a ticket to space,
+      where you will get unforgettable sensations.
+      We are glad that you chose us for your trip! <br><br>
+
+      Your ticket with a seat in the rocket capsule:</p>
+  </div>
+
+<table>
+  <tr>
+    <td>Your unique token: </td>
+    <td th:text="${token}"></td>
+  </tr>
+
+  <tr>
+    <td>row: </td>
+    <td th:text="${row}"></td>
+  </tr>
+
+
+  <tr>
+    <td>column: </td>
+    <td th:text="${column}"></td>
+  </tr>
+
+  <tr>
+    <td>price: </td>
+    <td th:text="${price}"></td>
+  </tr>
+
+</table>
+
+
+  <img class="ticket-rocket" src="../static/images/ticket.png" alt="">
+
+  <div class="footer">
+    <img class="footlogo" src="../static/images/logo.png" alt="">
+    <p class="text9">Space Travelling
+      im. Galileo Galileja
+      Wróblewskiego 69
+      54-200 Wrocław</p>
+    <p class="text10">Information: +48 577 182 162
+      Call center: +48 456 321 875 <br>
+      t-space.wro.pl</p>
+    <p class="text11">Copyright c 2023 SpacePL</p>
+    <button class="btn fb"><img src="../static/images/FB.png" alt=""></button>
+    <button class="btn inst"><img src="../static/images/inst.png" alt=""></button>
+    <button class="btn yt"><img src="../static/images/YT.png" alt=""></button>
+
+  </div>
+
+</body>
+</html>

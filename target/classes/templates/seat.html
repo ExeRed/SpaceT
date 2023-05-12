@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Choosing seat</title>
+  <link rel="stylesheet" type="text/css" href="../static/css/seat.css">
+  <link rel="icon" type="image/png" href="../static/images/logo.png">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    var selectedSeat = null; // chosen seat
+    $(document).ready(function() {
+      // kliker
+      $('.seat').click(function() {
+        // delete active in previous seat
+        if (selectedSeat !== null) {
+          $(selectedSeat).removeClass('active');
+        }
+        // choosing new and add active
+        selectedSeat = this;
+        $(selectedSeat).addClass('active');
+      });
+
+      document.getElementById("buy").addEventListener("click", function() {
+        var selectedSeat = document.getElementsByClassName("active")[0];
+        if (selectedSeat) {
+          var row = selectedSeat.getAttribute("data-row");
+          var column = selectedSeat.getAttribute("data-column");
+          window.location.href = "/purchase?row=" + row + "&column=" + column;
+        } else {
+          alert("Please select a seat before buying!");
+        }
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div class="mainConteiner">
+    <div class="header">
+        <a onclick="window.location.href='main'">
+          <img class="headlogo" src="../static/images/logo.png" alt="">
+         </a>
+      <button class="btn return" onclick="window.location.href='http://localhost:8081/returning'">RETURN</button>
+      <button class="btn about" onclick="window.location.href='http://localhost:8081/aboutus'">ABOUT US</button>
+      <button class="btn book" onclick="window.location.href='purchasing'">BOOK NOW</button>
+
+     <a href="https://www.facebook.com/">
+        <img class="btn fb" src="../static/images/FB.png" alt="">
+      </a>
+
+      <a href="https://www.instagram.com/valentin_bibik/">
+       <img class="btn inst" src="../static/images/inst.png" alt="">
+      </a>
+
+      <a href="https://www.youtube.com/">
+        <img class="btn yt" src="../static/images/YT.png" alt="">
+      </a>
+
+
+    </div>
+
+    <div class="text1">
+      <p>Book your ticket to another planet now!
+        Please select Your seat to purchase! </p>
+    </div>
+
+    <div class="seats-container">
+
+      <div class="row">
+        <div class="seat" data-row="1" data-column="1"></div>
+        <div class="seat" data-row="1" data-column="2"></div>
+        <div class="seat" data-row="1" data-column="3"></div>
+        <div class="seat" data-row="1" data-column="4"></div>
+      </div>
+      <div class="row">
+        <div class="seat" data-row="2" data-column="1"></div>
+        <div class="seat" data-row="2" data-column="2"></div>
+        <div class="seat" data-row="2" data-column="3"></div>
+        <div class="seat" data-row="2" data-column="4"></div>
+      </div>
+      <div class="row">
+        <div class="seat" data-row="3" data-column="1"></div>
+        <div class="seat" data-row="3" data-column="2"></div>
+        <div class="seat" data-row="3" data-column="3"></div>
+        <div class="seat" data-row="3" data-column="4"></div>
+      </div>
+      <div class="row">
+        <div class="seat" data-row="4" data-column="1"></div>
+        <div class="seat" data-row="4" data-column="2"></div>
+        <div class="seat" data-row="4" data-column="3"></div>
+        <div class="seat" data-row="4" data-column="4"></div>
+      </div>
+    </div>
+
+    <input class="btn buy" type="button" id="buy" value="Buy NOW">
+
+  </div>
+
+  <div class="footer">
+    <img class="footlogo" src="../static/images/logo.png" alt="">
+    <p class="text9">Space Travelling
+      im. Galileo Galileja
+      Wróblewskiego 69
+      54-200 Wrocław</p>
+    <p class="text10">Information: +48 577 182 162
+      Call center: +48 456 321 875 <br>
+      t-space.wro.pl</p>
+    <p class="text11">Copyright c 2023 SpacePL</p>
+    <button class="btn fb"><img src="../static/images/FB.png" alt=""></button>
+    <button class="btn inst"><img src="../static/images/inst.png" alt=""></button>
+    <button class="btn yt"><img src="../static/images/YT.png" alt=""></button>
+
+  </div>
+</body>
+</html>
