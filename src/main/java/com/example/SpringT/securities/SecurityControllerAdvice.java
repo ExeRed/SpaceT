@@ -1,4 +1,4 @@
-package com.example.SpringT;
+package com.example.SpringT.securities;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

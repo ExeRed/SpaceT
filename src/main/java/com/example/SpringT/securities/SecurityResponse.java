@@ -1,4 +1,4 @@
-package com.example.SpringT;
+package com.example.SpringT.securities;
 
 public class SecurityResponse {
 

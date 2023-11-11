@@ -1,14 +1,9 @@
-package com.example.SpringT;
+package com.example.SpringT.controllers;
 
+import com.example.SpringT.models.RocketRoom;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.UUID;
-
-import static com.example.SpringT.RocketRoom.getAllseat;
-import static com.example.SpringT.RocketRoom.seats;
+import static com.example.SpringT.models.RocketRoom.getAllseat;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {

@@ -1,19 +1,20 @@
-package com.example.SpringT;
+package com.example.SpringT.controllers;
 
+import com.example.SpringT.securities.SecurityException;
+import com.example.SpringT.securities.SecurityException2;
 import com.example.SpringT.models.*;
 import com.example.SpringT.repo.EmailRepository;
 import com.example.SpringT.repo.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static com.example.SpringT.RocketRoom.seats;
+import static com.example.SpringT.models.RocketRoom.seats;
 
 @Controller
 public class MainController {
@@ -168,7 +169,7 @@ public class MainController {
         model.addAttribute("tickets", allTickets);
         return "tickets-page";
     }
-/*
+
     @PostMapping("/stats")
     public Statistics stats(@RequestParam (required = false) String password) {
         if (password == null) {
@@ -178,6 +179,6 @@ public class MainController {
         } else {
             throw new SecurityException("The password is wrong!");
         }
-    } */
+    }
 
 }

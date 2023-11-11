@@ -1,6 +1,4 @@
-package com.example.SpringT;
-
-import com.example.SpringT.models.Seat;
+package com.example.SpringT.models;
 
 import java.util.ArrayList;
 import java.util.List;

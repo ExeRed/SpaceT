@@ -1,0 +1,77 @@
+html {
+    font-size: 10px;
+    font-family: 'Noto Sans Hebrew', serif;
+    color:#FFFFFF;
+    background: #101010;
+}
+
+.footer {
+    max-width: 120rem;
+    height: 14rem;
+    margin: auto;
+    background: #000 ;
+
+}
+
+.footernav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 7rem;
+    margin-left: 7rem;
+    font-size: 14px;
+}
+
+.text9 {
+    max-width: 13rem;
+}
+
+.text10 {
+    max-width: 10rem;
+}
+
+.text11 {
+    text-align: center;
+}
+
+.fb {
+    background: inherit;
+}
+
+.btn {
+    border: none;
+    background-color: inherit;
+}
+
+.buttombtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 568px) {
+    .footer {
+        height: auto;
+        padding: 1rem;
+    }
+
+    .footernav {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin: 0;
+        text-align: left;
+    }
+
+    .text9,
+    .text10 {
+        max-width: none;
+        margin-bottom: 1rem;
+
+    }
+
+    .buttombtn {
+        margin-top: 1rem;
+        flex-direction: row;
+    }
+}
