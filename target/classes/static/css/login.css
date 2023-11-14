@@ -1,0 +1,45 @@
+.login {
+    display: flex;
+    margin-top: 65px;
+    align-items: center;
+    flex-direction: column;
+    height: 350px;
+}
+
+.username {
+    border: 1px solid #FFFFFF;
+    background-color: inherit;
+    color: #FFFFFF;
+
+    width: 32rem;
+    height: 46px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.password {
+    border: 1px solid #FFFFFF;
+    background-color: inherit;
+    color: #FFFFFF;
+
+    width: 32rem;
+    height: 46px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.submit {
+    border: 1px solid #FFFFFF;
+    background-color: inherit;
+    width: 12rem;
+    height: 46px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.text {
+    font-weight: 800;
+    font-size: 24px;
+}
+

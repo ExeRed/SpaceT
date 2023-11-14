@@ -1,6 +1,7 @@
 package com.example.SpringT.securities;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,11 +11,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class SecurityControllerAdvice {
 
     @ExceptionHandler(SecurityException.class)
-    @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public SecurityResponse handleSecurityException(SecurityException se) {
-        SecurityResponse response = new SecurityResponse(se.getMessage());
-        return response;
+    public String handleSecurityException(SecurityException se, Model model) {
+        model.addAttribute("error", se.getMessage());
+        return "error404";
     }
 
     @ExceptionHandler(SecurityException2.class)
@@ -24,5 +24,6 @@ public class SecurityControllerAdvice {
         SecurityResponse response1 = new SecurityResponse(se.getMessage());
         return response1;
     }
+
 
 }

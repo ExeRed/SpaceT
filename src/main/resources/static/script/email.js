@@ -17,7 +17,7 @@ $(document).ready(function() {
                 setTimeout(function() {
                     $("#subscribeMessage").hide();
                     $("#subscribeForm").show();
-                }, 5000); // Скрыть сообщение через 3 секунды (3000 миллисекунд)
+                }, 5000);
             }
         });
     });

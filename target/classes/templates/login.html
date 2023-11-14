@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/registration.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="login">
+    <p class="text">Create your account</p>
+    <form th:action="@{/login}" th:object="${user}" method="post">
+        <input type="text" class="username" th:field="*{username}" placeholder="Username"
+               onfocus="if(this.placeholder==='Username'){this.placeholder=''}"
+               onblur="if(this.placeholder===''){this.placeholder='Username'}"><br>
+
+        <input type="password" class="password" placeholder="Password" th:field="*{password}"
+               onfocus="if(this.placeholder==='Password'){this.placeholder=''}"
+               onblur="if(this.placeholder===''){this.placeholder='Password'}"><br>
+        <button type="submit" class="submit">REGISTER</button>
+    </form>
+</div>
+
+<div id="footer"></div>
+<script src="../static/script/headerANDfooter.js"></script>
+</body>
+</html>
