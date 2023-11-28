@@ -20,8 +20,11 @@
         <input type="password" class="password" placeholder="Password" th:field="*{password}"
                onfocus="if(this.placeholder==='Password'){this.placeholder=''}"
                onblur="if(this.placeholder===''){this.placeholder='Password'}"><br>
-        <button type="submit" class="submit">REGISTER</button>
+        <button type="submit" class="submit">LOGIN</button>
     </form>
+
+    <p th:if="${error}" class="error-message">Incorrect username or password</p>
+</div>
 </div>
 
 <div id="footer"></div>

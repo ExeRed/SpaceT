@@ -1,10 +1,11 @@
 package com.example.SpringT.models;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import java.util.UUID;
 
-public class Token {
+public class Token implements Serializable {
 
     private UUID token;
 

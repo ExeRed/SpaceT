@@ -60,6 +60,12 @@ public class MainController {
         return "seat";
     }
 
+    @RequestMapping("/profile")
+    public String profile(){
+
+        return "profile";
+    }
+
     @RequestMapping("/aboutus")
     public String aboutus(){
 
