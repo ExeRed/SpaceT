@@ -6,6 +6,7 @@ import com.example.SpringT.models.*;
 import com.example.SpringT.repo.EmailRepository;
 import com.example.SpringT.repo.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.UUID;
 import static com.example.SpringT.models.RocketRoom.seats;
 
 @Controller
+@Component
 public class MainController {
 
     @Autowired
@@ -27,7 +29,13 @@ public class MainController {
 
     public static List<Seat> booked_seat = new ArrayList<>();
     public static List<UUID> booked_token = new ArrayList<>();
-    public static List<Ticket> tickets = new ArrayList<>();
+
+    public static List<Seat> getBooked_seat() {return booked_seat;}
+    public static List<UUID> getBooked_token() {return booked_token;}
+
+    public static Statistics getStatistics() {
+        return statistics;
+    }
 
 
     public static void BookedToken() {
@@ -40,10 +48,6 @@ public class MainController {
         for (int i = 0; i < 81; i++) {
             booked_seat.add(i, new Seat(0,0,0));
         }
-    }
-
-    public static void tickets() {
-
     }
 
     @PostMapping("/subscribe")
@@ -60,7 +64,7 @@ public class MainController {
         return "seat";
     }
 
-    @RequestMapping("/profile")
+    @GetMapping("/profile")
     public String profile(){
 
         return "profile";
@@ -82,7 +86,7 @@ public class MainController {
         return "returning";
     }
 
-    Statistics statistics = new Statistics(0,81,0);
+    static Statistics statistics = new Statistics(0,9,0);
     @RequestMapping("/purchase")
     public String bookSeat(@RequestParam int row, @RequestParam int column) {
 
@@ -139,9 +143,6 @@ public class MainController {
         model.addAttribute("price", booked_seat.get(index).getPrice());
         return "ticket";
     }
-
-
-
 
     @PostMapping("/returned")
     public String ReturnedTicket(@ModelAttribute("token") Token token, Model model) {

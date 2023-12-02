@@ -1,5 +1,6 @@
 package com.example.SpringT.models;
 
+
 public class Statistics {
     int current_income;
     int number_of_available_seats;

@@ -1,40 +1,40 @@
 package com.example.SpringT.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
-public class Ticket {
+public class Ticket implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+    private Long id;
 
-    @Column(columnDefinition = "BINARY(16)")
-    UUID token;
+    @Column(columnDefinition = "VARBINARY(16)")
+    private byte[] token;
+
     @Embedded
-    Seat ticket;
+    private Seat ticket;
 
-
-    public Ticket(UUID token) {
-        this.token = token;
+    public Ticket() {
     }
 
     public Ticket(UUID token, Seat ticket) {
-        this.token = token;
+        this.token = token != null ? token.toString().getBytes() : null;
         this.ticket = ticket;
     }
 
-    public Ticket() {
-
+    public Long getId() {
+        return id;
     }
 
     public UUID getToken() {
-        return token;
+        return token != null ? UUID.nameUUIDFromBytes(token) : null;
     }
 
     public void setToken(UUID token) {
-        this.token = token;
+        this.token = token != null ? token.toString().getBytes() : null;
     }
 
     public Seat getTicket() {
