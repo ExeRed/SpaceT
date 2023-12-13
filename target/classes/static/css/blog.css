@@ -7,13 +7,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-bottom: 50px;
 }
 
 .image-wrapper {
     width: 300px;
     height: 300px;
-    /* Регулируйте отступы по вашему усмотрению */
-    margin: 50px 5px 5px;
+    margin: 30px 5px 5px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,4 +24,59 @@ body {
     width: 300px;
     height: 300px;
     object-fit: cover;
+}
+
+#content {
+    position: relative;
+    display: flex;
+    max-width: 1000px;
+    height: 600px;
+    justify-content: space-between;
+    margin: 50px auto auto;
+    text-align: center;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+#content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url("../images/starfall-gif.gif");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(70%) opacity(0.5);
+    border-radius: 10px;
+    z-index: -1;
+}
+
+#image,
+#text {
+    display: flex;
+    max-height: 400px;
+    max-width: 500px;
+    margin: auto;
+    transition: opacity 1s ease-in-out;
+}
+
+#image {
+    opacity: 1;
+}
+
+#text {
+    padding-left: 30px;
+    text-align: left;
+    font-size: 24px;
+    opacity: 1;
+}
+
+.text-new {
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 36px;
+    padding-top: 20px;
 }
