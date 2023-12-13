@@ -43,3 +43,12 @@
     font-size: 24px;
 }
 
+.login-link {
+    margin-left: 100px;
+    background-color: inherit;
+    width: 6rem;
+    height: 23px;
+    font-size: 12px;
+    line-height: 22px;
+    color: #FFFFFF;
+}

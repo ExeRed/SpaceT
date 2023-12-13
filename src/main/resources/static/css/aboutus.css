@@ -1,39 +1,41 @@
 body {
-    margin: 0px auto;
-    background: #100F0D;
+    margin: auto;
+    background: url("../images/backgroundspace.png")  center/cover no-repeat;
+    max-width: 1200px;
 }
-
-
 
 .mainContainer {
     display: flex;
-    max-width: 1200px;
-    margin: auto;
-    background: url("../images/backgroundspace.png");
-    height: 800px;
     justify-content: space-between;
+    margin: 50px;
+    min-height: 500px;
 }
 
 .text-aboutus {
     padding-top: 50px;
-    margin: 40px;
-
-    font-family: 'Noto Sans Hebrew';
-    font-style: normal;
-    font-weight: 400;
+    padding-right: 50px;
     font-size: 16px;
-    line-height: 22px;
     text-align: justify;
-
     color: #FFFFFF;
 }
 
 .image-aboutus {
-    padding-top: 120px;
-    margin: 40px;
+    align-self: center;
     width: 445px;
     height: 250px;
 
 }
 
 
+@media only screen and (max-width: 768px) {
+    .mainContainer {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 568px) {
+    .image-aboutus {
+        width: 300px;
+        height: 135px;
+    }
+}

@@ -21,11 +21,15 @@
                    onfocus="if(this.placeholder==='Password'){this.placeholder=''}"
                    onblur="if(this.placeholder===''){this.placeholder='Password'}"><br>
             <button type="submit" class="submit">LOGIN</button>
+
+            <a href="/register" class="register-link">Register</a>
+
         </form>
 
         <p th:if="${error}" class="error-message">Incorrect username or password</p>
-    </div>
 
+
+    </div>
 
 <div id="footer"></div>
 <script src="../static/script/headerANDfooter.js"></script>

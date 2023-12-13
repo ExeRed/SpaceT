@@ -2,62 +2,116 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SpaceT Admin</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" type="image/png" href="../static/images/logo.png">
+    <link rel="stylesheet" type="text/css" href="../static/css/adminPage.css">
 </head>
 <body>
-List of users
 
-    <table>
-        <thred>
-            <tr>
-                <th>Name</th>
-                <th>Role</th>
-                <th></th>
-            </tr>
-        </thred>
-        <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.username}"></td>
-                <td>
-                    <span th:each="role : ${user.roles}" th:text="${role}"></span>
-                </td>
-                <td><a th:href="@{/admin/{id}(id=${user.id})}">edit</a></td>
-            </tr>
-        </tbody>
-    </table>
+    <div id="header"></div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+    <div class="content">
 
 
-<div>
-    <p>Current Income: <span th:text="${stats.current_income}"></span></p>
-    <p>Number of Available Seats: <span th:text="${stats.number_of_available_seats}"></span></p>
-    <p>Number of Purchased Tickets: <span th:text="${stats.number_of_purchased_tickets}"></span></p>
-</div>
-
-<table border="1">
-    <thead>
-    <tr>
-        <th>Seat Row</th>
-        <th>Seat Column</th>
-        <th>Price</th>
-        <th>Token</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Пример заполнения таблицы данными о сидениях и токенах -->
-    <!-- Предполагается, что у вас есть соответствующие данные в модели -->
-    <!-- Итерация по списку сидений и токенов -->
-    <th:block th:each="seat, index : ${seat}">
-        <tr>
-            <td th:text="${seat.seat_row}"></td>
-            <td th:text="${seat.seat_column}"></td>
-            <td th:text="${seat.price}"></td>
-            <td th:text="${token[index]}"></td>
-        </tr>
-    </th:block>
-
-    </tbody>
-</table>
+        <div class="toggle-header" id="users-toggle-header">
+            <span class="header-text">List of Users</span>
+            <i class="arrow-down"></i>
+        </div>
+        <div class="table-wrapper" id="users-table-wrapper">
+            <table id="users-table" class="styled-table hidden-table">
+                <thred>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thred>
+                <tbody>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.username}"></td>
+                        <td>
+                            <span th:each="role : ${user.roles}" th:text="${role}"></span>
+                        </td>
+                        <td><a th:href="@{/admin/{id}(id=${user.id})}">edit</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
 
+        <div class="toggle-header" id="statistics-toggle-header">
+            <span class="header-text">Statistics</span>
+            <i class="arrow-down"></i>
+        </div>
+        <div class="statistics-wrapper hidden-table" id="statistics-wrapper">
+            <p>Current Income: <span th:text="${stats.current_income}"></span></p>
+            <p>Number of Available Seats: <span th:text="${stats.number_of_available_seats}"></span></p>
+            <p>Number of Purchased Tickets: <span th:text="${stats.number_of_purchased_tickets}"></span></p>
+        </div>
+
+
+        <div class="toggle-header" id="tickets-toggle-header">
+            <span class="header-text">List of Tickets</span>
+            <i class="arrow-down"></i>
+        </div>
+        <div class="table-wrapper" id="tickets-table-wrapper">
+            <table id="tickets-table" class="styled-table hidden-table">
+                <thead>
+                <tr>
+
+                    <th>Token</th>
+                    <th>Seat Row</th>
+                    <th>Seat Column</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td th:text="${ticket.token}"></td>
+                    <td th:text="${ticket.ticket.seat_row}"></td>
+                    <td th:text="${ticket.ticket.seat_column}"></td>
+                    <td th:text="${ticket.ticket.price}"></td>
+                    <td><a th:href="@{/admin/delete/{token}(token=${ticket.token})}">delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <form method="post" enctype="multipart/form-data" th:action="@{/admin/addFile}">
+            <input type="file" name="file">
+            <button type="submit">Add</button>
+        </form>
+
+
+    </div>
+
+    <div id="footer"></div>
+    <script src="../static/script/headerANDfooter.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#users-toggle-header').click(function() {
+                $('#users-table').slideToggle();
+                $(this).find('.arrow-down').toggleClass('rotate');
+            });
+
+            $('#statistics-toggle-header').click(function() {
+                $('#statistics-wrapper').slideToggle();
+                $(this).find('.arrow-down').toggleClass('rotate');
+            });
+
+            $('#tickets-toggle-header').click(function() {
+                $('#tickets-table').slideToggle();
+                $(this).find('.arrow-down').toggleClass('rotate');
+            });
+        });
+
+
+    </script>
 </body>
 </html>
