@@ -1,0 +1,27 @@
+body {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.images-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-wrapper {
+    width: 300px;
+    height: 300px;
+    /* Регулируйте отступы по вашему усмотрению */
+    margin: 50px 5px 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-item {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}

@@ -1,205 +1,52 @@
 body {
-    min-width: 1100px;
-    margin: 0px auto;
-    background: #100F0D;
+    max-width: 1200px;
+    margin: auto;
 }
 
-.header {
-    position: absolute;
-    width: 1440px;
-    height: 105px;
-    left: 0px;
-    top: 0px;
-
-    background: rgba(16, 15, 13, 0.6);
-
-}
-
-.btn {
-    border: none;
-    background-color: inherit;
-}
-
-
-.headlogo {
-    position: absolute;
-    width: 70px;
-    height: 76.6px;
-    left: 207px;
-    top: 14px;
-}
-
-.about {
-    position: absolute;
-    display: inline-block;
-    width: 100px;
-    height: 30px;
-    left: 830px;
-    top: 38px;
-
-    font-family: 'Noto Sans Hebrew', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-
-    color: #FFFFFF;
-}
-
-.book {
-    position: absolute;
-    width: 87px;
-    height: 32px;
-    left: 975px;
-    top: 38px;
-
-    font-family: 'Noto Sans Hebrew', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-
-    color: #FFFFFF;
-    border: 1px solid #FFFFFF;
-}
-
-.fb {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 1129px;
-    top: 39px;
-
-}
-
-.inst {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 1183px;
-    top: 39px;
-}
-
-.yt {
-    position: absolute;
-    width: 24px;
-    height: 24px;
-    left: 1240px;
-    top: 39px;
+.containter {
+    display: flex;
+    justify-content: space-between;
+    margin: 100px 50px 50px 50px;
+    height: 65vh;
+    min-height: 500px;
 }
 
 table {
-
+    margin-left: 100px;
     color: #FFFFFF;
+    max-width: 350px;
 
-    position: absolute;
-    width: 500px;
-    height: 76px;
-    left: 280px;
-    top: 345px;
-
-    font-family: 'Noto Sans Hebrew';
-    font-style: normal;
-    font-weight: 400;
     font-size: 18px;
-    line-height: 19px;
-
-
 }
 
 .text-ticket {
-    position: absolute;
-    width: 546px;
-    height: 140px;
-    left: 238px;
-    top: 200px;
+    max-width: 500px;
 
-    font-family: 'Noto Sans Hebrew';
-    font-style: normal;
-    font-weight: 400;
     font-size: 18px;
-    line-height: 19px;
-
     color: #FFFFFF;
-
 }
 
 .ticket-rocket {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    left: 819px;
-    top: 132px;
-    z-index: 1;
+    width: 350px;
+    height: 350px;
     border-radius: 204px;
     display: block;
 }
 
-.footer {
-    position: absolute;
-    width: 1440px;
-    height: 177px;
-    left: 0px;
-    top: 645px;
+@media only screen and (max-width: 768px) {
+    .ticket-rocket {
+        width: 200px;
+        height: 200px;
+        border-radius: 102px;
+    }
 
-    background: #000000;
+    table {
+        margin-left: 50px;
+    }
 }
 
-.footlogo {
-    position: absolute;
-    width: 85px;
-    height: 93.02px;
-    left: 195px;
-    top: 35px;
+@media only screen and (max-width: 568px) {
+    .ticket-rocket {
+        display: none;
+    }
 }
-
-.text9 {
-    position: absolute;
-    width: 134px;
-    height: 76px;
-    left: 355px;
-    top: 40px;
-
-    font-family: 'Noto Sans Hebrew', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-
-    color: #BFBFBF;
-}
-
-.text10 {
-
-    position: absolute;
-    width: 195px;
-    height: 57px;
-    left: 551px;
-    top: 40px;
-
-    font-family: 'Noto Sans Hebrew', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-
-    color: #BFBFBF;
-}
-
-.text11 {
-    position: absolute;
-    width: 178px;
-    height: 17px;
-    left: 673px;
-    top: 145px;
-
-    font-family: 'Inter', serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-
-    color: #BFBFBF;
-
-}
-
