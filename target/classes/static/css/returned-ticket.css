@@ -1,6 +1,4 @@
 table {
-    color: #FFFFFF;
-
     position: relative;
     width: 500px;
     height: 76px;
@@ -15,7 +13,5 @@ table {
     height: 65vh;
 
     font-size: 18px;
-
-    color: #FFFFFF;
 
 }

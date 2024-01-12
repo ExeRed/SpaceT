@@ -16,7 +16,7 @@
     height: 65vh;
 }
 
-form {
+.form {
     display: flex;
     justify-content: space-between;
     max-width: 500px;

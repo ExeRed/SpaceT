@@ -79,13 +79,30 @@ a {
 }
 
 .btn {
-    margin-right: 8px;
+    margin-right: 5px;
+    cursor: pointer;
 }
 
 
-.profile {
-    margin-right: 25px;
+.logout-btn {
+    background-color: #290e56;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+    margin: 0 25px 4px 2px;
+
 }
+
+.logout-btn:hover {
+    background-color: #7134db; /* Цвет фона кнопки при наведении */
+}
+
 
 
 @media only screen and (max-width: 768px) {
@@ -130,7 +147,7 @@ a {
         padding: 0;
     }
 
-    .profile {
+    .logout-btn {
         margin-right: 60px;
     }
 }

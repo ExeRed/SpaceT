@@ -11,10 +11,6 @@
 
     <div id="header"></div>
 
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-
     <div class="content">
 
 
@@ -83,35 +79,21 @@
             </table>
         </div>
 
-        <form method="post" enctype="multipart/form-data" th:action="@{/admin/addFile}">
-            <input type="file" name="file">
-            <button type="submit">Add</button>
-        </form>
-
-
+        <div class="upload-form">
+            <p class="file-text">Make new post in the blog</p>
+            <form method="post" enctype="multipart/form-data" th:action="@{/admin/addFile}">
+                <label for="file-upload" class="custom-file-upload">
+                    <i class="fas fa-cloud-upload-alt"></i> Choose File
+                </label>
+                <input id="file-upload" type="file" name="file">
+                <button class="button" type="submit">Upload</button>
+            </form>
+        </div>
+        
     </div>
 
     <div id="footer"></div>
     <script src="../static/script/headerANDfooter.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#users-toggle-header').click(function() {
-                $('#users-table').slideToggle();
-                $(this).find('.arrow-down').toggleClass('rotate');
-            });
-
-            $('#statistics-toggle-header').click(function() {
-                $('#statistics-wrapper').slideToggle();
-                $(this).find('.arrow-down').toggleClass('rotate');
-            });
-
-            $('#tickets-toggle-header').click(function() {
-                $('#tickets-table').slideToggle();
-                $(this).find('.arrow-down').toggleClass('rotate');
-            });
-        });
-
-
-    </script>
+    <script src="../static/script/toggleHandler.js"></script>
 </body>
 </html>

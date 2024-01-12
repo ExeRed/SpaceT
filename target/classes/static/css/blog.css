@@ -80,3 +80,21 @@ body {
     font-size: 36px;
     padding-top: 20px;
 }
+
+@media only screen and (max-width: 768px) {
+    #content {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 568px) {
+    #image,
+    #text {
+        max-height: 300px;
+        max-width: 400px;
+    }
+
+    #content {
+        height: 500px;
+    }
+}
