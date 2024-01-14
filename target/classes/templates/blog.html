@@ -19,14 +19,24 @@
         <p>WHAT'S NEW?</p>
     </div>
 
+
+
     <div class="images-container">
         <div th:each="file : ${files}" class="image-wrapper">
-            <img th:src="@{/img/{filename}(filename=${file})}" class="image-item"/>
+            <img th:src="@{/img/{filename}(filename=${file})}" class="image-item" onclick="openFullscreen(this)"/>
         </div>
+    </div>
+
+
+    <!-- Модальное окно для отображения изображения на весь экран -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeFullscreen()">&times;</span>
+        <img class="modal-content" id="fullScreenImage"/>
     </div>
 
     <div id="footer"></div>
 
+    <script src="../static/script/fullScreenImg.js"></script>
     <script src="../static/script/headerANDfooter.js"></script>
     <script src="../static/script/blogContent.js"></script>
 </body>
