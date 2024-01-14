@@ -11,8 +11,7 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(columnDefinition = "VARBINARY(16)")
-    private byte[] token;
+    private String token;
 
     @Embedded
     private Seat ticket;
@@ -20,21 +19,17 @@ public class Ticket implements Serializable {
     public Ticket() {
     }
 
-    public Ticket(UUID token, Seat ticket) {
-        this.token = token != null ? token.toString().getBytes() : null;
+    public Ticket(String token, Seat ticket) {
+        this.token = token;
         this.ticket = ticket;
     }
 
-    public Long getId() {
-        return id;
+    public String getToken() {
+        return token;
     }
 
-    public UUID getToken() {
-        return token != null ? UUID.nameUUIDFromBytes(token) : null;
-    }
-
-    public void setToken(UUID token) {
-        this.token = token != null ? token.toString().getBytes() : null;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Seat getTicket() {

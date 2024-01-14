@@ -5,6 +5,7 @@ import com.example.SpringT.models.Role;
 import com.example.SpringT.models.User;
 import com.example.SpringT.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Collections;
 import java.util.Map;
 
+//Registration and login controller
 @Controller
 public class RegistrationController {
     @Autowired
@@ -29,6 +31,7 @@ public class RegistrationController {
         return "registration";
     }
 
+    //registering, encrypting and saving data to DB
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user, Map<String, Object> model) {
         User userFromDb = userRepository.findByUsername(user.getUsername());
@@ -37,6 +40,11 @@ public class RegistrationController {
             model.put("message", "User exists!");
             return "registration";
         }
+
+        //password encryption
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
 
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
@@ -54,9 +62,9 @@ public class RegistrationController {
     @PostMapping("/login")
     public String login(@ModelAttribute("user") User user, Model model) {
         if (userService.loginUser(user)) {
-            return "redirect:/profile";
+            return "redirect:/admin";
         } else {
-            model.addAttribute("error", true); // Добавляем атрибут ошибки в модель
+            model.addAttribute("error", true);
             return "login";
         }
     }

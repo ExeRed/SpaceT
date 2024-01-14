@@ -6,14 +6,19 @@ import com.example.SpringT.models.*;
 import com.example.SpringT.repo.EmailRepository;
 import com.example.SpringT.repo.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.text.AttributedString;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static com.example.SpringT.models.RocketRoom.seats;
 
@@ -27,11 +32,14 @@ public class MainController {
     @Autowired
     private EmailRepository emailRepository;
 
+    @Value("${upload.path}")
+    private String uploadPath;
+
     public static List<Seat> booked_seat = new ArrayList<>();
-    public static List<UUID> booked_token = new ArrayList<>();
+    public static List<String> booked_token = new ArrayList<>();
 
     public static List<Seat> getBooked_seat() {return booked_seat;}
-    public static List<UUID> getBooked_token() {return booked_token;}
+    public static List<String> getBooked_token() {return booked_token;}
 
     public static Statistics getStatistics() {
         return statistics;
@@ -64,10 +72,17 @@ public class MainController {
         return "seat";
     }
 
-    @GetMapping("/profile")
-    public String profile(){
+    @GetMapping("/blog")
+    public String blog(Model model){
+        File[] files = new File(uploadPath).listFiles();
+        if (files != null) {
+            List<String> filenames = Arrays.stream(files)
+                    .map(File::getName)
+                    .collect(Collectors.toList());
+            model.addAttribute("files", filenames);
+        }
 
-        return "profile";
+        return "blog";
     }
 
     @RequestMapping("/aboutus")
@@ -78,6 +93,11 @@ public class MainController {
 
     @GetMapping("/main")
     public String mainPage() {
+        return "main";
+    }
+
+    @GetMapping("/")
+    public String main() {
         return "main";
     }
 
@@ -100,14 +120,14 @@ public class MainController {
             int index = row * 9 + column - 10;
             if (row < 5) {
                 UUID uuid = UUID.randomUUID();
-                ticket = new Ticket(uuid, new Seat(row, column, 10));
+                ticket = new Ticket(uuid.toString(), new Seat(row, column, 10));
                 booked_seat.set(index,new Seat(row, column, 10));
-                booked_token.set(index, uuid);
+                booked_token.set(index, uuid.toString());
             } else {
                 UUID uuid = UUID.randomUUID();
-                ticket = new Ticket(uuid, new Seat(row, column, 8 ));
+                ticket = new Ticket(uuid.toString(), new Seat(row, column, 8 ));
                 booked_seat.set(index, new Seat(row, column, 8));
-                booked_token.set(index, uuid);
+                booked_token.set(index, uuid.toString());
             }
             return getSeat(client, ticket, index);
         } else {
@@ -144,9 +164,10 @@ public class MainController {
         return "ticket";
     }
 
+
     @PostMapping("/returned")
     public String ReturnedTicket(@ModelAttribute("token") Token token, Model model) {
-        UUID token1 = token.getToken();
+        String token1 = token.getToken();
         if (booked_token.contains(token1)) {
             int i = booked_token.indexOf(token1);
             ReturnedTicket returnedTicket = new ReturnedTicket(booked_seat.get(i));
