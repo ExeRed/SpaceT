@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Returning</title>
+        <link rel="stylesheet" type="text/css" href="../static/css/return.css">
+        <link rel="icon" type="image/png" href="../static/images/logo.png">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div id="header"></div>
+
+       <div class="content">
+            <p class="text-returning">We are sorry that you are returning your ticket,
+                we hope you will come back to us soon.<br><br>
+                To redeem your ticket, you simply need to enter your unique token:
+            </p>
+
+
+            <form action="/returned" method="post" class="form">
+                <input class="token" type="text" name="token" placeholder="Token"
+                       onfocus="if(this.placeholder==='Token'){this.placeholder=''}"
+                       onblur="if(this.placeholder===''){this.placeholder='Token'}">
+                <button class="submit" type="submit">RETURN</button>
+            </form>
+       </div>
+
+        <div id="footer"></div>
+
+        <script src="../static/script/headerANDfooter.js"></script>
+
+    </body>
+</html>

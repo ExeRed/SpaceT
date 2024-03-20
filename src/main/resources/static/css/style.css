@@ -1,0 +1,196 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+html {
+    font-size: 10px;
+    font-family: 'Noto Sans Hebrew', serif;
+    text-color:#FFFFFF;
+    background: #101010;
+}
+
+.container1 {
+    max-width: 120rem;
+    margin: auto;
+    height: 82rem;
+    background: url(../images/mainpic.jpeg) center/cover no-repeat ;
+    background-clip: content-box;
+}
+
+.text1 {
+    max-width: 60rem;
+    font-weight: 800;
+    font-size: 48px;
+    text-align: center;
+    padding-top: 8rem;
+    padding-left: 5rem;
+    margin: 0;
+}
+
+.text2 {
+    max-width: 55rem;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    padding-left: 15rem;
+    margin: 0;
+}
+
+.text3 {
+    max-width: 50rem;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: justify;
+    padding-top: 10rem;
+    padding-left: 10rem;
+}
+
+.container2 {
+
+    max-width: 1200px;
+    display: flex;
+    margin: auto;
+    height: 308px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10rem 10rem;
+}
+
+.text4 {
+    max-width: 40rem;
+    font-weight: 800;
+    font-size: 36px;
+
+}
+
+.email {
+    border: 1px solid #FFFFFF;
+    background-color: inherit;
+    color: #FFFFFF;
+
+    width: 32rem;
+    height: 46px;
+    font-size: 16px;
+    margin-right: 5rem;
+
+}
+
+.submit {
+    box-sizing: border-box;
+    border: 1px solid #FFFFFF;
+    background-color: inherit;
+    width: 12rem;
+
+    height: 46px;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.container3 {
+    max-width: 120rem;
+    height: 110rem;
+    margin: auto;
+    background: url(../images/baсkgroundbottom.png) center/cover no-repeat ;
+    background-clip: content-box;
+}
+
+.textbottom {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: justify;
+    margin: auto;
+
+}
+
+.text5 {
+    padding-top: 4rem;
+    font-weight: 800;
+    font-size: 36px;
+    text-align: center;
+}
+
+.text6 {
+    max-width: 50rem;
+    padding-top: 7rem;
+    padding-left: 7rem;
+    margin-right: 7rem;
+}
+
+.text7 {
+    float: right;
+    max-width: 50rem;
+    padding-top: 7rem;
+    margin-right: 7rem;
+    padding-left: 7rem;
+    margin-bottom: 5rem;
+}
+
+.text8 {
+    max-width: 50rem;
+    padding-top: 25rem;
+    padding-left: 7rem;
+    margin-right: 7rem;
+}
+
+@media only screen and (max-width: 768px) {
+    .text1 {
+        max-width: 45rem;
+        font-size: 36px;
+    }
+
+    .text2 {
+        max-width: 40rem;
+        padding-left: 10rem;
+    }
+
+    .text3 {
+        max-width: 40rem;
+    }
+
+    .text4 {
+        text-align: center;
+    }
+
+    .container2 {
+        align-items: center;
+        flex-direction: column;
+
+    }
+
+    .email {
+        margin-right: 0rem;
+        width: 23rem;
+    }
+
+
+}
+
+@media only screen and (max-width: 568px) {
+    .text1 {
+        padding-left: 0;
+    }
+    .text2 {
+        padding-left: 0;
+    }
+    .text3 {
+        padding-left: 1rem;
+        padding-right: 5rem;
+    }
+
+    .text4 {
+        font-size: 24px;
+    }
+
+    .submit {
+        margin-left: 20%;
+    }
+
+
+
+}
+
