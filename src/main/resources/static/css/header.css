@@ -103,7 +103,9 @@ a {
     background-color: #7134db;
 }
 
-
+.btn {
+    color: white;
+}
 
 @media only screen and (max-width: 768px) {
     .nav__menu {
