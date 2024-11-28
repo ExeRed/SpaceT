@@ -5,24 +5,27 @@
   <title>Registration</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../static/css/registration.css">
+  <link rel="stylesheet" href="../static/css/regular.css">
+  <link rel="stylesheet" href="../static/css/semibold.css">
+  <link rel="stylesheet" href="../static/css/medium.css">
 </head>
 <body>
 
   <div id="header"></div>
 
   <div class="registration">
-    <p class="text">Create your account</p>
+    <p class="text semibold-text">Create your account</p>
     <form th:action="@{/register}" th:object="${user}" method="post">
-      <input type="text" class="username" th:field="*{username}" placeholder="Username"
+      <input type="text" class="username regular-text" th:field="*{username}" placeholder="Username"
                               onfocus="if(this.placeholder==='Username'){this.placeholder=''}"
                               onblur="if(this.placeholder===''){this.placeholder='Username'}"><br>
 
-      <input type="password" class="password" placeholder="Password" th:field="*{password}"
+      <input type="password" class="password regular-text" placeholder="Password" th:field="*{password}"
                               onfocus="if(this.placeholder==='Password'){this.placeholder=''}"
                               onblur="if(this.placeholder===''){this.placeholder='Password'}"><br>
-      <button type="submit" class="submit">REGISTER</button>
+      <button type="submit" class="submit medium-text">REGISTER</button>
 
-      <a href="/login" class="login-link">Login</a>
+      <a href="/login" class="login-link medium-text">Login</a>
     </form>
   </div>
 

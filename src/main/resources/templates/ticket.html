@@ -5,6 +5,8 @@
   <link rel="stylesheet" type="text/css" href="../static/css/ticket.css">
   <link rel="stylesheet" type="text/css" href="../static/css/footer.css">
   <link rel="stylesheet" type="text/css" href="../static/css/header.css">
+  <link rel="stylesheet" href="../static/css/regular.css">
+  <link rel="stylesheet" href="../static/css/medium.css">
   <link rel="icon" type="image/png" href="../static/images/logo.png">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -68,7 +70,7 @@
 
   <div class="containter">
     <div class="textAndTable">
-      <div class="text-ticket">
+      <div class="text-ticket medium-text">
         <p>Dear Reader, congratulations! <br> <br>
 
           You have just booked a ticket to space,
@@ -78,7 +80,7 @@
           Your ticket with a seat in the rocket capsule:</p>
       </div>
 
-      <table>
+      <table class="regular-text">
         <tr>
           <td>Your unique token: </td>
           <td th:text="${token}"></td>
