@@ -13,11 +13,55 @@
     <div id="header"></div>
 
     <div id="content" class="content">
-        <img id="image" src="../static/images/sky-star.jpeg">
-        <p id="text regular-text">As darkness fell, the firmament revealed its secrets, unveiling an awe-inspiring spectacle—a myriad of stars, scattered like ethereal dust, painting the heavens with their silent brilliance.</p>
+        <!--<img id="image" src="../static/images/sky-star.jpeg">-->
+        <h1 class="bold-text">Welcome to Our Blog</h1>
+        <p class="regular-text">
+            Your ultimate hub for travel inspiration, practical tips, and the latest updates in the world of aviation. Whether you're a seasoned traveler or planning your first journey, we’ve got everything you need in one place.
+        </p>
+    
+        <h2 class="semibold-text">Travel Tips & Hacks</h2>
+        <p class="regular-text">
+            Effortless travel starts with the right knowledge. From packing smart to finding the best flight deals, explore actionable tips to enhance your travel experience.
+        </p>
+        <ul class="regular-text">
+            <li><strong>Packing Pro Like a Minimalist</strong>: Save space and travel lighter than ever.</li>
+            <li><strong>How to Snag the Best Flight Deals</strong>: Timing, tools, and tricks revealed.</li>
+        </ul>
+    
+        <h2 class="semibold-text">Destination Highlights</h2>
+        <p class="regular-text">
+            Uncover the beauty of the world one destination at a time. Get inspired with our curated guides to incredible places you won’t want to miss.
+        </p>
+        <ul class="regular-text">
+            <li><strong>Hidden Gems of Southeast Asia</strong>: Escape the crowds and dive into authentic culture.</li>
+            <li><strong>5 Winter Wonderlands to Visit This Year</strong>: Dreamy escapes for the colder season.</li>
+        </ul>
+    
+        <h2 class="semibold-text">Traveler Stories</h2>
+        <p class="regular-text">
+            Real journeys, real experiences. Learn from our community of explorers and discover new perspectives.
+        </p>
+        <ul class="regular-text">
+            <li><strong>“From Backpacks to Boardrooms: My Solo Journey”</strong></li>
+            <li><strong>“A Family’s Adventure in the Alps”</strong></li>
+        </ul>
+    
+        <h2 class="semibold-text">Airline News & Updates</h2>
+        <p class="regular-text">
+            Stay informed with the latest trends, policies, and innovations shaping the travel industry.
+        </p>
+        <ul class="regular-text">
+            <li><strong>New Routes to Watch in 2024</strong>: Expanding horizons for global travel.</li>
+            <li><strong>Your Guide to Updated Baggage Policies</strong>: Stay ahead and avoid surprises.</li>
+        </ul>
+    
+        <h2 class="semibold-text">Let’s Explore Together!</h2>
+        <p class="regular-text">
+            Whether you’re looking for travel hacks, inspiration for your next trip, or want to learn the latest in aviation, our blog has it all. Happy traveling! ✈️
+        </p>
     </div>
 
-    <div class="text-new semibold-text">
+    <!--<div class="text-new semibold-text">
         <p>WHAT'S NEW?</p>
     </div>
 
@@ -27,7 +71,7 @@
         <div th:each="file : ${files}" class="image-wrapper">
             <img th:src="@{/img/{filename}(filename=${file})}" class="image-item" onclick="openFullscreen(this)"/>
         </div>
-    </div>
+    </div>-->
 
 
     <!-- Модальное окно для отображения изображения на весь экран -->
