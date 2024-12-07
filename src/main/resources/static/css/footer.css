@@ -22,6 +22,17 @@ html {
     font-size: 14px;
 }
 
+.footlogo {
+    max-width: 10rem; /* Adjust logo size */
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.footer-content {
+    text-align: center;
+    font-size: 1.4rem; /* Scale font size appropriately */
+}
+
 .text9 {
     max-width: 13rem;
 }
@@ -48,6 +59,9 @@ html {
     align-items: center;
     justify-content: space-between;
 }
+
+  
+  
 
 @media only screen and (max-width: 568px) {
     .footer {

@@ -107,6 +107,20 @@ a {
     color: white;
 }
 
+.nav__logo {
+    /* Set a maximum width to limit the logo's size */
+    max-width: 150px; /* Adjust this value as needed */
+  
+    /* Make the logo responsive */
+    width: 100%; /* Ensure the logo takes up 100% of its container's width */
+  }
+  
+  .headlogo {
+    /* Maintain aspect ratio and prevent distortion */
+    max-width: 100%;
+    height: auto;
+  }
+
 @media only screen and (max-width: 768px) {
     .nav__menu {
         position: fixed;
