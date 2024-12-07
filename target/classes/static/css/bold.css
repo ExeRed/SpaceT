@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Enriqueta';
+    src: url('../fonts/Enriqueta-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.bold-text {
+    font-family: 'Enriqueta', serif;
+    font-weight: bold;
+}

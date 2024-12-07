@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Enriqueta';
+    src: url('../fonts/Enriqueta-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+.semibold-text {
+    font-family: 'Enriqueta', serif;
+    font-weight: 600;
+}

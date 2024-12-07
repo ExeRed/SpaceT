@@ -13,15 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.example.SpringT.models.RocketRoom.seats;
-
+import static com.example.SpringT.models.FlightRoom.seats;
+/*
 @Controller
 @Component
 public class MainController {
@@ -106,8 +105,8 @@ public class MainController {
         return "returning";
     }
 
-    static Statistics statistics = new Statistics(0,9,0);
-    @RequestMapping("/purchase")
+    static Statistics statistics = new Statistics(0,9,0); */
+/*    @RequestMapping("/purchase")
     public String bookSeat(@RequestParam int row, @RequestParam int column) {
 
         Seat client = new Seat(row, column, 8);
@@ -153,9 +152,9 @@ public class MainController {
         } else {
             throw new SecurityException("The ticket has been already purchased!");
         }
-    }
+    } */
 
-    @GetMapping("/ticket/{index}")
+ /*   @GetMapping("/ticket/{index}")
     public String showTicket(@PathVariable int index, Model model) {
         model.addAttribute("token", booked_token.get(index));
         model.addAttribute("row", booked_seat.get(index).getSeat_row());
@@ -163,9 +162,9 @@ public class MainController {
         model.addAttribute("price", booked_seat.get(index).getPrice());
         return "ticket";
     }
+*/
 
-
-    @PostMapping("/returned")
+ /*   @PostMapping("/returned")
     public String ReturnedTicket(@ModelAttribute("token") Token token, Model model) {
         String token1 = token.getToken();
         if (booked_token.contains(token1)) {
@@ -189,8 +188,8 @@ public class MainController {
         } else {
             throw new SecurityException("Wrong token!");
         }
-    }
-
+    } */
+/*
     @GetMapping("/all-tickets")
     public String getAllTickets(Model model) {
         List<Ticket> allTickets = ticketRepository.findAll();
@@ -209,4 +208,4 @@ public class MainController {
         }
     }
 
-}
+} */

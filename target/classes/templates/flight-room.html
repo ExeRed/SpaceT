@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Выбор места</title>
+    <style>
+        /* Стили для отображения сетки */
+        #seats {
+            display: grid;
+            grid-template-columns: repeat(4, 50px); /* 4 колонки (по количеству мест в ряду) */
+            grid-gap: 10px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        /* Кнопки для доступных мест */
+        .available {
+            background-color: green;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        /* Кнопки для забронированных мест */
+        .booked {
+            background-color: red;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            cursor: not-allowed;
+        }
+
+        /* Заголовок */
+        h1 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Choose a seat</h1>
+<div id="seats"></div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const flightId = urlParams.get('flightId');
+
+    async function loadSeats() {
+        const response = await fetch(`/seats/view?flightId=${flightId}`);
+        const seats = await response.json();
+
+        const seatsContainer = document.getElementById('seats');
+        seatsContainer.innerHTML = '';
+
+        // Добавляем места в контейнер с сеткой
+        seats.forEach(seat => {
+            const status = seat.booked ? 'booked' : 'available';
+            const button = document.createElement('button');
+            button.className = status;
+            button.textContent = `${seat.row}-${seat.seatNumber}`;
+            button.onclick = () => bookSeat(seat.row, seat.seatNumber);
+            button.disabled = seat.booked;
+            seatsContainer.appendChild(button);
+        });
+    }
+
+    async function bookSeat(row, seatNumber) {
+        try {
+            const response = await fetch('/tickets/book', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `flightId=${flightId}&row=${row}&seatNumber=${seatNumber}`
+            });
+
+            if (response.ok) {
+                const ticket = await response.json();
+                window.location.href = `/ticket.html?ticketId=${ticket.id}`;
+            } else {
+                const errorMessage = await response.text();
+                alert(errorMessage);
+            }
+        } catch (error) {
+            console.error('Booking error:', error);
+            alert('Не удалось забронировать место');
+        }
+    }
+
+    loadSeats();
+</script>
+</body>
+</html>

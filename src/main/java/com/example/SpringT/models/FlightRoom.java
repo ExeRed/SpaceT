@@ -3,7 +3,7 @@ package com.example.SpringT.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RocketRoom {
+public class FlightRoom {
     int total_rows;
     int total_columns;
 
@@ -11,15 +11,15 @@ public class RocketRoom {
 
     public static List<Seat> seats = new ArrayList<>();
 
-    public RocketRoom() {}
+    public FlightRoom() {}
 
-    public RocketRoom(int total_rows, int total_columns, List<Seat> available_seats) {
+    public FlightRoom(int total_rows, int total_columns, List<Seat> available_seats) {
         this.total_rows = total_rows;
         this.total_columns = total_columns;
         this.available_seats = available_seats;
     }
 
-    public static RocketRoom getAllseat(int rows, int columns){
+  /*  public static FlightRoom getAllseat(int rows, int columns){
         for (int i = 1; i <= rows; i++) {
             for(int j = 1; j <= columns; j++) {
                 if (i < 5) {
@@ -29,8 +29,8 @@ public class RocketRoom {
                 }
             }
         }
-        return new RocketRoom(rows, columns, seats);
-    }
+        return new FlightRoom(rows, columns, seats);
+    }*/
 
     public int getTotal_rows() {
         return total_rows;

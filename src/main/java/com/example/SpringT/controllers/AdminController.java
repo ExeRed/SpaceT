@@ -1,7 +1,7 @@
 package com.example.SpringT.controllers;
 
 import com.example.SpringT.models.*;
-import com.example.SpringT.controllers.MainController;
+//import com.example.SpringT.controllers.MainController;
 import com.example.SpringT.repo.TicketRepository;
 import com.example.SpringT.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class AdminController {
     private UserRepository userRepository;
 
     @Autowired
-    private MainController mainController;
+  //  private MainController mainController;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -42,9 +42,9 @@ public class AdminController {
     // Display the user list along with statistics and ticket information
     @GetMapping
     public String userList(Model model) {
-        Statistics stats = MainController.getStatistics();
+     //   Statistics stats = MainController.getStatistics();
         model.addAttribute("users", userRepository.findAll());
-        model.addAttribute("stats", stats);
+      //  model.addAttribute("stats", stats);
         model.addAttribute("tickets", ticketRepository.findAll());
 
         File[] files = new File(uploadPath).listFiles();
@@ -86,7 +86,7 @@ public class AdminController {
 
     @GetMapping("/delete/{token}")
     public String deleteTicket(@PathVariable String token) {
-        ticketRepository.deleteByToken(token);
+    //    ticketRepository.deleteByToken(token);
         return "redirect:/admin";
     }
 

@@ -1,42 +1,63 @@
 package com.example.SpringT.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
-public class Ticket implements Serializable {
-
+public class Ticket {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String token;
+    @ManyToOne
+    @JoinColumn(name = "flight_id")
+    private Flight flight;
 
-    @Embedded
-    private Seat ticket;
+    @ManyToOne
+    @JoinColumn(name = "seat_id")
+    private Seat seat;
 
-    public Ticket() {
+    private BigDecimal price;
+
+    public Ticket() {}
+
+    public Ticket(Long id, Flight flight, Seat seat, BigDecimal price) {
+        this.id = id;
+        this.flight = flight;
+        this.seat = seat;
+        this.price = price;
     }
 
-    public Ticket(String token, Seat ticket) {
-        this.token = token;
-        this.ticket = ticket;
+    public Long getId() {
+        return id;
     }
 
-    public String getToken() {
-        return token;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public Flight getFlight() {
+        return flight;
     }
 
-    public Seat getTicket() {
-        return ticket;
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
 
-    public void setTicket(Seat ticket) {
-        this.ticket = ticket;
+    public Seat getSeat() {
+        return seat;
+    }
+
+    public void setSeat(Seat seat) {
+        this.seat = seat;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

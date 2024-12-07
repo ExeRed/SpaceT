@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>SpaceT</title>
   <link rel="stylesheet" type="text/css" href="../static/css/header.css">
+  <link rel="stylesheet" href="../static/css/medium.css">
+  <link rel="stylesheet" href="../static/css/semibold.css">
   <link rel="icon" type="image/png" href="../static/images/logo.png">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -19,9 +21,9 @@
       <div>
         <div class="headbtn">
 
-          <button onclick="changeTextSize('reset')" class="btn text-size-icon">A</button>
-          <button onclick="changeTextSize('increaseBy2')" class="btn text-size-icon">A+</button>
-          <button onclick="changeTextSize('increaseBy4')" class="btn text-size-icon">A++</button>
+          <button onclick="changeTextSize('reset')" class="btn text-size-icon medium-text">A</button>
+          <button onclick="changeTextSize('increaseBy2')" class="btn text-size-icon medium-text">A+</button>
+          <button onclick="changeTextSize('increaseBy4')" class="btn text-size-icon medium-text">A++</button>
           <button onclick="window.location.href='https://www.facebook.com'" class="btn fb">
             <svg xmlns="http://www.w3.org/2000/svg" height="15" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#aaaaaa}</style><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
           </button>
@@ -36,7 +38,7 @@
           </button>
           <div th:if="${loggedIn}" class="btn logout">
             <form th:action="@{/logout}" method="post">
-              <button type="submit" class="logout-btn">
+              <button type="submit" class="logout-btn medium-text">
                 Sign Out
               </button>
             </form>
@@ -47,16 +49,16 @@
 
         <ul class="nav__menu">
           <li class="nav__item">
-            <a onclick="window.location.href='/returning'" class="nav__link">RETURN</a>
+            <a onclick="window.location.href='/returning'" class="nav__link semibold-text">RETURN</a>
           </li>
           <li class="nav__item">
-            <a onclick="window.location.href='/aboutus'" class="nav__link">ABOUT</a>
+            <a onclick="window.location.href='/aboutus'" class="nav__link semibold-text">ABOUT</a>
           </li>
           <li class="nav__item">
-            <a onclick="window.location.href='/blog'" class="nav__link">BLOG</a>
+            <a onclick="window.location.href='/blog'" class="nav__link semibold-text">BLOG</a>
           </li>
           <li class="nav__item">
-            <a onclick="window.location.href='/purchasing'" class="nav__link">BOOK</a>
+            <a onclick="window.location.href='/purchasing'" class="nav__link semibold-text">BOOK</a>
           </li>
         </ul>
       </div>

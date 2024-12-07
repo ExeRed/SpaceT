@@ -27,16 +27,10 @@ body {
 }
 
 #content {
-    position: relative;
-    display: flex;
-    max-width: 1000px;
-    height: 600px;
-    justify-content: space-between;
-    margin: 50px auto auto;
-    text-align: center;
-    padding: 30px;
-    box-sizing: border-box;
-    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto; /* Center the blog section */
+    padding: 20px;
+    text-align: center; /* Center align all text */
 }
 
 #content::before {
@@ -113,20 +107,31 @@ body {
 }
 
 
-@media only screen and (max-width: 768px) {
-    #content {
-        flex-direction: column;
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .bold-text {
+        font-size: 1.5em;
+    }
+
+    .medium-text {
+        font-size: 1.2em;
+    }
+
+    .regular-text {
+        font-size: 0.95em;
     }
 }
 
-@media only screen and (max-width: 568px) {
-    #image,
-    #text {
-        max-height: 300px;
-        max-width: 400px;
+@media (max-width: 480px) {
+    .bold-text {
+        font-size: 1.2em;
     }
 
-    #content {
-        height: 500px;
+    .medium-text {
+        font-size: 1em;
+    }
+
+    .regular-text {
+        font-size: 0.9em;
     }
 }

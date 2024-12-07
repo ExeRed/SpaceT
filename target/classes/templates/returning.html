@@ -4,13 +4,14 @@
         <meta charset="UTF-8">
         <title>Returning</title>
         <link rel="stylesheet" type="text/css" href="../static/css/return.css">
+        <link rel="stylesheet" href="../static/css/regular.css">
         <link rel="icon" type="image/png" href="../static/images/logo.png">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
         <div id="header"></div>
 
-       <div class="content">
+       <div class="content regular-text">
             <p class="text-returning">We are sorry that you are returning your ticket,
                 we hope you will come back to us soon.<br><br>
                 To redeem your ticket, you simply need to enter your unique token:
@@ -18,10 +19,10 @@
 
 
             <form action="/returned" method="post" class="form">
-                <input class="token" type="text" name="token" placeholder="Token"
+                <input class="token regular-text" type="text" name="token" placeholder="Ticket number"
                        onfocus="if(this.placeholder==='Token'){this.placeholder=''}"
                        onblur="if(this.placeholder===''){this.placeholder='Token'}">
-                <button class="submit" type="submit">RETURN</button>
+                <button class="submit regular-text" type="submit">RETURN</button>
             </form>
        </div>
 

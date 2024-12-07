@@ -1,5 +1,5 @@
 .text-returning {
-    margin-left: 100px;
+    margin: 0 auto; /* Centers the element horizontally */
     margin-top: 50px;
     width: 360px;
     height: 48px;
@@ -7,7 +7,11 @@
     font-size: 18px;
     color: #FFFFFF;
 
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
 }
+
 
 .content {
     margin: auto;

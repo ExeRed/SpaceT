@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Enriqueta';
+    src: url('../fonts/Enriqueta-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+.medium-text {
+    font-family: 'Enriqueta', serif;
+    font-weight: 500;
+}

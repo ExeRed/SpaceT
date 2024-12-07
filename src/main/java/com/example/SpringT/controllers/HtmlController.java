@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HtmlController {
@@ -20,5 +21,17 @@ public class HtmlController {
             model.addAttribute("loggedIn", false);
         }
         return "header";
+    }
+
+    @GetMapping("/flight-room.html")
+    public String showFlightRoomPage(@RequestParam Long flightId, Model model) {
+        model.addAttribute("flightId", flightId);
+        return "flight-room";
+    }
+
+    @GetMapping("/ticket.html")
+    public String showTicket(@RequestParam Long ticketId, Model model) {
+        model.addAttribute("ticketId", ticketId);
+        return "ticket";
     }
 }

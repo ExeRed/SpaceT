@@ -1,25 +1,25 @@
 package com.example.SpringT.controllers;
 
-import com.example.SpringT.models.RocketRoom;
+import com.example.SpringT.models.FlightRoom;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static com.example.SpringT.models.RocketRoom.getAllseat;
+/*
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
 
-    private final RocketRoom cinema;
+    private final FlightRoom cinema;
 
     public RestController() {
         this.cinema = getAllseat(9, 9);
     }
 
     @GetMapping("/seats")
-    public RocketRoom cinemaRoom() {
+    public FlightRoom cinemaRoom() {
         return cinema;
     }
 
-   /* Statistics statistics = new Statistics(0,81,0);
+    Statistics statistics = new Statistics(0,81,0);
     @PostMapping("/purchase")
     public String bookSeat(@RequestBody Seat client) {
 
@@ -97,6 +97,6 @@ public class RestController {
         } else {
             throw new SecurityException("The password is wrong!");
         }
-    } */
+    }
 
-}
+} */

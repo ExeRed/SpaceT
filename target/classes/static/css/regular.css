@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Enriqueta';
+    src: url('../fonts/Enriqueta-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.regular-text {
+    font-family: 'Enriqueta', serif;
+    font-weight: normal;
+}

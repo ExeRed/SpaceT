@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <title>Returned Ticket</title>
     <link rel="stylesheet" type="text/css" href="../static/css/returned-ticket.css">
+    <link rel="stylesheet" href="../static/css/regular.css">
+    <link rel="stylesheet" href="../static/css/semibold.css">
     <link rel="icon" type="image/png" href="../static/images/logo.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div id="header"></div>
 
-    <div class="returned-ticket">
+    <div class="returned-ticket semibold-text">
         <p>Returned ticket:</p>
-    <table>
+    <table class="regular-text">
         <tr>
             <td>Token: </td>
             <td th:text="${token}"></td>
