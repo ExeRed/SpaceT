@@ -21,12 +21,13 @@
 
     <div id="header"></div>
 
-    <p class="text1 bold-text">Discover  New Experience By
-        Exploring Space</p>
-    <p class="text2 medium-text">We Are The First Company In The Word To Accept
-        Tours To Space With Multiple Destinations In Them</p>
-    <p class="text3 regular-text">Space travel is an adventure unlike any other, and it appeals to those who seek excitement and thrill. The idea of launching into space and experiencing the weightlessness of zero gravity is an exhilarating concept. Well, sit back and relax because we’ll give you a truly out of this world experience! </p>
+    <h1>Choose your destination</h1>
 
+    <select id="fromCity"></select>
+    <select id="toCity"></select>
+    <button onclick="selectFlight()">Show flights</button>
+
+    <div id="flights"></div>
 </div>
 
 <div class="container2">
@@ -62,6 +63,40 @@
 <div id="footer"></div>
 
 <script src="../static/script/headerANDfooter.js"></script>
+<script>
+    async function loadCities() {
+        const response = await fetch('/flights/select');
+        const cities = await response.json();
+        const fromCitySelect = document.getElementById('fromCity');
+        const toCitySelect = document.getElementById('toCity');
+
+        cities.forEach(city => {
+            fromCitySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
+            toCitySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
+        });
+    }
+
+    async function selectFlight() {
+        const fromCityId = document.getElementById('fromCity').value;
+        const toCityId = document.getElementById('toCity').value;
+
+        const response = await fetch(`/flights/available?fromCityId=${fromCityId}&toCityId=${toCityId}`);
+        const flights = await response.json();
+
+        const flightsContainer = document.getElementById('flights');
+        flightsContainer.innerHTML = '';
+        flights.forEach(flight => {
+            flightsContainer.innerHTML += `<button onclick="viewSeats(${flight.id})">Flight ${flight.id}</button>`;
+        });
+    }
+
+    async function viewSeats(flightId) {
+        window.location.href = `/flight-room.html?flightId=${flightId}`;
+    }
+
+    loadCities();
+</script>
+
 
 </body>
 </html>

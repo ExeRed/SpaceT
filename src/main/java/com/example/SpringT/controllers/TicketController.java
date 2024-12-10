@@ -2,9 +2,11 @@ package com.example.SpringT.controllers;
 
 import com.example.SpringT.Service.TicketService;
 import com.example.SpringT.models.Ticket;
+import com.example.SpringT.models.Token;
 import com.example.SpringT.repo.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,9 +32,10 @@ public class TicketController {
     }
 
     @GetMapping("/{ticketId}")
-    public ResponseEntity<?> getTicket(@PathVariable Long ticketId) {
+    public ResponseEntity<Ticket> getTicket(@PathVariable Long ticketId) {
         return ticketRepository.findById(ticketId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
 }

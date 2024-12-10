@@ -48,5 +48,14 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
+    public Ticket findByReturnToken(String returnToken) {
+        return ticketRepository.findByReturnToken(returnToken)
+                .orElseThrow(() -> new NullPointerException("ticket not found"));
+    }
 
+    public void cancelTicket(String returnToken) {
+        Ticket ticket = findByReturnToken(returnToken);
+        ticket.getSeat().setBooked(false);
+        ticketRepository.delete(ticket);
+    }
 }

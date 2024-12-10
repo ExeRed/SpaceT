@@ -1,5 +1,6 @@
 package com.example.SpringT.controllers;
 
+import com.example.SpringT.Service.TicketService;
 import com.example.SpringT.models.City;
 import com.example.SpringT.models.Flight;
 import com.example.SpringT.models.Seat;
@@ -35,4 +36,6 @@ public class FlightController {
     public List<Flight> getAvailableFlights(@RequestParam Long fromCityId, @RequestParam Long toCityId) {
         return flightRepository.findByFromCityIdAndToCityId(fromCityId, toCityId);
     }
+
+
 }

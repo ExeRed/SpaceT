@@ -20,9 +20,15 @@ public class Ticket {
 
     private BigDecimal price;
 
-    public Ticket() {}
+    @Column(unique = true, nullable = false)
+    private String returnToken;
+
+    public Ticket() {
+        this.returnToken = UUID.randomUUID().toString();
+    }
 
     public Ticket(Long id, Flight flight, Seat seat, BigDecimal price) {
+        this();
         this.id = id;
         this.flight = flight;
         this.seat = seat;
@@ -59,5 +65,12 @@ public class Ticket {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+    public String getReturnToken() {
+        return returnToken;
+    }
+
+    public void setReturnToken(String returnToken) {
+        this.returnToken = returnToken;
     }
 }

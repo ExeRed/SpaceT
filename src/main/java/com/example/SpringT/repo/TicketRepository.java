@@ -14,4 +14,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface TicketRepository extends CrudRepository<Ticket, Long> {
+    Optional<Ticket> findByReturnToken(String returnToken);
+
 }

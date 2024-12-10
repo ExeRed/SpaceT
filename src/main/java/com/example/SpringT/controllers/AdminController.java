@@ -45,7 +45,7 @@ public class AdminController {
      //   Statistics stats = MainController.getStatistics();
         model.addAttribute("users", userRepository.findAll());
       //  model.addAttribute("stats", stats);
-        model.addAttribute("tickets", ticketRepository.findAll());
+       // model.addAttribute("tickets", ticketRepository.findAll());
 
         File[] files = new File(uploadPath).listFiles();
         if (files != null) {

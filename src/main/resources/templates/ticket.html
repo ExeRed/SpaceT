@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ваш билет</title>
+  <title>Your ticket</title>
 </head>
 <body>
-<h1>Билет успешно куплен!</h1>
+<h1>Successfully purchased!</h1>
 
 <div id="ticket-details">
-  <p>Загрузка...</p>
+  <p>loading...</p>
 </div>
 
-<a href="/">Вернуться на главную</a>
+<a href="/">Return to main</a>
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
@@ -24,10 +24,11 @@
         const ticket = await response.json();
         const detailsContainer = document.getElementById('ticket-details');
         detailsContainer.innerHTML = `
-          <p>Номер билета: ${ticket.id}</p>
-          <p>Рейс: ${ticket.flight.fromCity.name} - ${ticket.flight.toCity.name}</p>
-          <p>Ряд: ${ticket.seat.row}, Место: ${ticket.seat.seatNumber}</p>
-          <p>Цена: ${ticket.price} руб.</p>
+          <p>Ticket number: ${ticket.id}</p>
+          <p>Flight: ${ticket.flight.fromCity.name} - ${ticket.flight.toCity.name}</p>
+          <p>Row: ${ticket.seat.row}, Seat: ${ticket.seat.seatNumber}</p>
+          <p>Price: ${ticket.price} руб.</p>
+          <p>Return Token: ${ticket.returnToken}</p>
         `;
       } else {
         throw new Error('Ticket not found');
