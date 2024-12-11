@@ -8,11 +8,50 @@
     <link rel="stylesheet" href="../static/css/semibold.css">
     <link rel="icon" type="image/png" href="../static/images/logo.png">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+    margin: 0;
+}
+
+#footer {
+    margin-top: auto;
+    height: 50px;
+    background-color: #1a1a1a;
+}
+
+
+        .return-message {
+            font-size: 18px;
+            line-height: 1.6;
+            color: white; /* White text for message */
+            margin: 20px;
+            background-color: #333; /* Slightly lighter dark background */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 600px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: white; /* White text */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+    </style>
 </head>
 <body>
     <div id="header"></div>
 
-    <p>Ticket returned successfully.</p>
+    <p class="return-message">Ticket returned successfully.</p>
+
 
     <div id="footer"></div>
 
