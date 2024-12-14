@@ -13,18 +13,65 @@
 
     <script src="../static/script/email.js"></script>
 
+    <style>
+        .container1 {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            gap: 15px;
+            background-color: #ffffff; /* white background */
+            font-family: Arial, sans-serif;
+            border: 1px solid #000; /* black border */
+        }
 
+        h1 {
+            margin-right: 20px;
+            font-size: 18px;
+            color: #fff; /* black text */
+        }
+
+        select {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #000; /* black border */
+            border-radius: 5px;
+            font-size: 14px;
+            color: #000; /* black text */
+            background-color: #fff; /* white background */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #7134db; /* purple button */
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #fff; /* white text */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5b2aad; /* darker purple on hover */
+        }
+
+        #flights {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #000; /* black text */
+        }
+    </style>
 </head>
 <body>
-
-<div class="container1">
-
     <div id="header"></div>
 
+<div class="container1">
     <h1>Choose your destination</h1>
 
     <select id="fromCity"></select>
     <select id="toCity"></select>
+    <input type="date" id="departureDate" style="width: 200px; padding: 8px; border: 1px solid #000; border-radius: 5px; font-size: 14px; color: #000; background-color: #fff;">
     <button onclick="selectFlight()">Show flights</button>
 
     <div id="flights"></div>
@@ -67,31 +114,70 @@
 
 <script src="../static/script/headerANDfooter.js"></script>
 <script>
+const today = new Date().toISOString().split("T")[0];
+
+// Set the min attribute of the departureDate input to today's date
+document.getElementById("departureDate").setAttribute("min", today);
+
     async function loadCities() {
-        const response = await fetch('/flights/select');
-        const cities = await response.json();
-        const fromCitySelect = document.getElementById('fromCity');
-        const toCitySelect = document.getElementById('toCity');
+    const response = await fetch('/flights/select');
+    const cities = await response.json();
+    const fromCitySelect = document.getElementById('fromCity');
+    const toCitySelect = document.getElementById('toCity');
 
-        cities.forEach(city => {
-            fromCitySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
-            toCitySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
-        });
+    cities.forEach(city => {
+        const option = `<option value="${city.id}">${city.name}</option>`;
+        fromCitySelect.innerHTML += option;
+        toCitySelect.innerHTML += option;
+    });
+
+    // Add event listeners to handle selection changes
+    fromCitySelect.addEventListener('change', () => filterToCityOptions(cities));
+    toCitySelect.addEventListener('change', () => filterFromCityOptions(cities));
+}
+
+function filterToCityOptions(cities) {
+    const fromCityValue = document.getElementById('fromCity').value;
+    const toCitySelect = document.getElementById('toCity');
+
+    toCitySelect.innerHTML = cities
+        .filter(city => city.id !== fromCityValue) // Exclude the selected fromCity
+        .map(city => `<option value="${city.id}">${city.name}</option>`)
+        .join('');
+}
+
+function filterFromCityOptions(cities) {
+    const toCityValue = document.getElementById('toCity').value;
+    const fromCitySelect = document.getElementById('fromCity');
+
+    fromCitySelect.innerHTML = cities
+        .filter(city => city.id !== toCityValue) // Exclude the selected toCity
+        .map(city => `<option value="${city.id}">${city.name}</option>`)
+        .join('');
+}
+
+async function selectFlight() {
+    const fromCityId = document.getElementById('fromCity').value;
+    const toCityId = document.getElementById('toCity').value;
+
+    if (!fromCityId || !toCityId) {
+        alert('Please select both a departure city and a destination.');
+        return;
     }
 
-    async function selectFlight() {
-        const fromCityId = document.getElementById('fromCity').value;
-        const toCityId = document.getElementById('toCity').value;
+    const response = await fetch(`/flights/available?fromCityId=${fromCityId}&toCityId=${toCityId}`);
+    const flights = await response.json();
 
-        const response = await fetch(`/flights/available?fromCityId=${fromCityId}&toCityId=${toCityId}`);
-        const flights = await response.json();
+    const flightsContainer = document.getElementById('flights');
+    flightsContainer.innerHTML = '';
+    flights.forEach(flight => {
+        flightsContainer.innerHTML += `<button onclick="viewSeats(${flight.id})">Flight ${flight.id}</button>`;
+    });
+}
 
-        const flightsContainer = document.getElementById('flights');
-        flightsContainer.innerHTML = '';
-        flights.forEach(flight => {
-            flightsContainer.innerHTML += `<button onclick="viewSeats(${flight.id})">Flight ${flight.id}</button>`;
-        });
-    }
+// Call the loadCities function when the page loads
+document.addEventListener('DOMContentLoaded', loadCities);
+
 
     async function viewSeats(flightId) {
         window.location.href = `/flight-room.html?flightId=${flightId}`;

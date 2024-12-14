@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <title>Выбор места</title>
     <style>
+         html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Ensure the page takes the full viewport height */
+        }
+
+        body {
+            background-image: url("../static/images/backgroundspace.png"); /* Replace with your image URL */
+            background-size: cover; /* Stretches the image to cover the entire page */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents tiling */
+            background-attachment: fixed; /* Keeps the image fixed when scrolling */
+        }
         /* Стили для отображения сетки */
         #seats {
             display: grid;
@@ -36,7 +49,9 @@
 
         /* Заголовок */
         h1 {
-            text-align: center;
+            color: white; /* Makes the text white */
+            text-align: center; /* Centers the heading */
+            margin-top: 50px; /* Adds spacing from the top */
         }
     </style>
 </head>

@@ -41,51 +41,45 @@
             </table>
         </div>
 
-        <div class="toggle-header" id="flights-toggle-header">
-            <span class="header-text semibold-text">List of Flights</span>
+
+        <div class="toggle-header" id="statistics-toggle-header">
+            <span class="header-text semibold-text">Statistics</span>
             <i class="arrow-down"></i>
         </div>
-        <div class="table-wrapper" id="flights-table-wrapper">
-            <table id="flights-table" class="styled-table">
+        <div class="statistics-wrapper hidden-table regular-text" id="statistics-wrapper">
+            <p>Current Income: <span th:text="${stats.current_income}"></span></p>
+            <p>Number of Available Seats: <span th:text="${stats.number_of_available_seats}"></span></p>
+            <p>Number of Purchased Tickets: <span th:text="${stats.number_of_purchased_tickets}"></span></p>
+        </div>
+
+
+        <div class="toggle-header" id="tickets-toggle-header">
+            <span class="header-text semibold-text">List of Tickets</span>
+            <i class="arrow-down"></i>
+        </div>
+        <div class="table-wrapper" id="tickets-table-wrapper">
+            <table id="tickets-table" class="styled-table hidden-table regular-text">
                 <thead>
                 <tr>
-                    <th>Flight ID</th>
-                    <th>From City</th>
-                    <th>To City</th>
-                    <th>Total Seats</th>
-                    <th>Booked Seats</th>
+
+                    <th>Token</th>
+                    <th>Seat Row</th>
+                    <th>Seat Column</th>
+                    <th>Price</th>
+                    <th></th>
                 </tr>
                 </thead>
-                <tbody id="flights-table-body">
-                <!-- Rows will be populated dynamically -->
+                <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td th:text="${ticket.token}"></td>
+                    <td th:text="${ticket.ticket.seat_row}"></td>
+                    <td th:text="${ticket.ticket.seat_column}"></td>
+                    <td th:text="${ticket.ticket.price}"></td>
+                    <td><a th:href="@{/admin/delete/{token}(token=${ticket.token})}">delete</a></td>
+                </tr>
                 </tbody>
             </table>
         </div>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                fetch('/admin/all-flights')
-                    .then(response => response.json())
-                    .then(flights => {
-                        const tableBody = document.getElementById('flights-table-body');
-                        flights.forEach(flightData => {
-                            const flight = flightData.flight;
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
-                    <td>${flight.id}</td>
-                    <td>${flight.fromCity.name}</td>
-                    <td>${flight.toCity.name}</td>
-                    <td>${flightData.totalSeats}</td>
-                    <td>${flightData.bookedSeats}</td>
-                `;
-                            tableBody.appendChild(row);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching flights:', error);
-                    });
-            });
-        </script>
 
         <div class="upload-form">
             <p class="file-text regular-text">Make new post in the blog</p>
