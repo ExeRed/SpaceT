@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static com.example.SpringT.models.FlightRoom.seats;
 
 @Controller
 @Component

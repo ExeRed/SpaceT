@@ -1,8 +1,5 @@
 package com.example.SpringT.controllers;
 
-import com.example.SpringT.models.FlightRoom;
-import org.springframework.web.bind.annotation.GetMapping;
-
 /*
 
 @org.springframework.web.bind.annotation.RestController

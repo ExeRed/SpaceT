@@ -38,23 +38,8 @@ public class AdminController {
         this.ticketRepository = ticketRepository;
     }
 
-
-    // Display the user list along with statistics and ticket information
     @GetMapping
-    public String userList(Model model) {
-     //   Statistics stats = MainController.getStatistics();
-        model.addAttribute("users", userRepository.findAll());
-      //  model.addAttribute("stats", stats);
-       // model.addAttribute("tickets", ticketRepository.findAll());
-
-        File[] files = new File(uploadPath).listFiles();
-        if (files != null) {
-            List<String> filenames = Arrays.stream(files)
-                    .map(File::getName)
-                    .collect(Collectors.toList());
-            model.addAttribute("files", filenames);
-        }
-
+    public String adminPage() {
         return "adminPage";
     }
 

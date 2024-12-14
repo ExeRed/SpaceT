@@ -4,13 +4,10 @@ $(document).ready(function() {
         $(this).find('.arrow-down').toggleClass('rotate');
     });
 
-    $('#statistics-toggle-header').click(function() {
-        $('#statistics-wrapper').slideToggle();
+    $('#flights-toggle-header').click(function() {
+        $('#flights-table-wrapper').slideToggle();
         $(this).find('.arrow-down').toggleClass('rotate');
     });
 
-    $('#tickets-toggle-header').click(function() {
-        $('#tickets-table').slideToggle();
-        $(this).find('.arrow-down').toggleClass('rotate');
-    });
+
 });
