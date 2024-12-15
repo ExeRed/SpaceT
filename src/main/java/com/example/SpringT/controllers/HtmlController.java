@@ -13,6 +13,11 @@ public class HtmlController {
         return "footer";
     }
 
+    @GetMapping("/rodo.html")
+    public String getRodo() {
+        return "rodo";
+    }
+
     @GetMapping("/header.html")
     public String getHeader(Authentication authentication, Model model) {
         if (authentication != null && authentication.isAuthenticated()) {
