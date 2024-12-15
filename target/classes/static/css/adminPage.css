@@ -103,3 +103,98 @@ body {
 button:hover {
     background-color: #7134db;
 }
+
+/* Центрирование admin-container и стилизация */
+.admin-container {
+    margin: 50px auto; /* Центрируем по горизонтали и добавляем отступы сверху/снизу */
+    background-color: #ffffff; /* Белый фон */
+    border-radius: 8px; /* Закругление углов */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Тень для контейнера */
+    padding: 20px 30px; /* Отступы внутри контейнера */
+    max-width: 600px; /* Ограничиваем ширину */
+    width: 100%; /* Адаптивность */
+    text-align: center; /* Текст по центру */
+}
+
+/* Заголовки */
+.admin-container h2,
+.admin-container h3 {
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+/* Группы формы */
+.admin-container .form-group {
+    margin-bottom: 15px;
+    text-align: left; /* Выравнивание текста слева */
+}
+
+.admin-container label {
+    display: block; /* Лейбл в отдельной строке */
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555555;
+}
+
+/* Поля ввода */
+.admin-container input,
+.admin-container select {
+    width: 100%; /* Растягиваем на всю ширину */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
+}
+
+.admin-container input:focus,
+.admin-container select:focus {
+    border-color: #7134db; /* Цвет рамки при фокусе */
+    outline: none;
+}
+
+/* Кнопка отправки */
+.admin-container .submit-btn {
+    background-color: #290e56;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-container .submit-btn:hover {
+    background-color: #7134db;
+}
+
+/* Стили для таблицы с существующими рейсами */
+.admin-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f9f9f9; /* Фон таблицы */
+}
+
+.admin-container th,
+.admin-container td {
+    padding: 10px;
+    border: 1px solid #dddddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+.admin-container thead {
+    background-color: #290e56;
+    color: white;
+}
+
+.admin-container tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Полосатый стиль */
+}
+
+.admin-container tbody tr:hover {
+    background-color: #e6f7ff; /* Подсветка строки */
+}

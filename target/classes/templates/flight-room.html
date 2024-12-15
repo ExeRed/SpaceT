@@ -2,32 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Выбор места</title>
+    <title>Choose the seat</title>
     <style>
-         html, body {
+        html, body {
             margin: 0;
             padding: 0;
-            height: 100%; /* Ensure the page takes the full viewport height */
+            height: 100%;
         }
 
         body {
-            background-image: url("../static/images/backgroundspace.png"); /* Replace with your image URL */
-            background-size: cover; /* Stretches the image to cover the entire page */
-            background-position: center; /* Centers the image */
-            background-repeat: no-repeat; /* Prevents tiling */
-            background-attachment: fixed; /* Keeps the image fixed when scrolling */
+            background-image: url("../static/images/backgroundspace.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        /* Стили для отображения сетки */
+
         #seats {
             display: grid;
-            grid-template-columns: repeat(4, 50px); /* 4 колонки (по количеству мест в ряду) */
+            grid-template-columns: repeat(4, 50px);
             grid-gap: 10px;
             justify-content: center;
             align-items: center;
             margin-top: 20px;
         }
 
-        /* Кнопки для доступных мест */
         .available {
             background-color: green;
             color: white;
@@ -37,7 +39,6 @@
             cursor: pointer;
         }
 
-        /* Кнопки для забронированных мест */
         .booked {
             background-color: red;
             color: white;
@@ -47,11 +48,40 @@
             cursor: not-allowed;
         }
 
-        /* Заголовок */
         h1 {
-            color: white; /* Makes the text white */
-            text-align: center; /* Centers the heading */
-            margin-top: 50px; /* Adds spacing from the top */
+            color: white;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #email-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 300px;
+        }
+
+        #email-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        #book-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #book-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -59,9 +89,18 @@
 <h1>Choose a seat</h1>
 <div id="seats"></div>
 
+<div id="email-container">
+    <input type="email" id="email-input" placeholder="Enter your email" required>
+    <button id="book-button" disabled>Book Seat</button>
+</div>
+
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const flightId = urlParams.get('flightId');
+    let selectedSeat = null;
+
+    const emailInput = document.getElementById('email-input');
+    const bookButton = document.getElementById('book-button');
 
     async function loadSeats() {
         const response = await fetch(`/seats/view?flightId=${flightId}`);
@@ -70,26 +109,65 @@
         const seatsContainer = document.getElementById('seats');
         seatsContainer.innerHTML = '';
 
-        // Добавляем места в контейнер с сеткой
         seats.forEach(seat => {
             const status = seat.booked ? 'booked' : 'available';
             const button = document.createElement('button');
             button.className = status;
             button.textContent = `${seat.row}-${seat.seatNumber}`;
-            button.onclick = () => bookSeat(seat.row, seat.seatNumber);
+            button.onclick = () => selectSeat(seat.row, seat.seatNumber, button);
             button.disabled = seat.booked;
             seatsContainer.appendChild(button);
         });
     }
 
-    async function bookSeat(row, seatNumber) {
+    function selectSeat(row, seatNumber, button) {
+        // Deselect previously selected seat
+        const previousSelected = document.querySelector('.selected');
+        if (previousSelected) {
+            previousSelected.classList.remove('selected');
+            previousSelected.style.backgroundColor = 'green';
+        }
+
+        // Select new seat
+        button.classList.add('selected');
+        button.style.backgroundColor = 'blue';
+        selectedSeat = { row, seatNumber };
+
+        // Enable book button if email is valid
+        checkBookButtonState();
+    }
+
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+    function checkBookButtonState() {
+        const isEmailValid = validateEmail(emailInput.value);
+        bookButton.disabled = !(selectedSeat && isEmailValid);
+    }
+
+    emailInput.addEventListener('input', checkBookButtonState);
+
+    bookButton.addEventListener('click', async () => {
+        if (!selectedSeat) {
+            alert('Please select a seat');
+            return;
+        }
+
+        const email = emailInput.value;
+        if (!validateEmail(email)) {
+            alert('Please enter a valid email');
+            return;
+        }
+
         try {
             const response = await fetch('/tickets/book', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: `flightId=${flightId}&row=${row}&seatNumber=${seatNumber}`
+                body: `flightId=${flightId}&row=${selectedSeat.row}&seatNumber=${selectedSeat.seatNumber}&email=${encodeURIComponent(email)}`
             });
 
             if (response.ok) {
@@ -101,9 +179,9 @@
             }
         } catch (error) {
             console.error('Booking error:', error);
-            alert('Не удалось забронировать место');
+            alert('Failed to book the seat');
         }
-    }
+    });
 
     loadSeats();
 </script>

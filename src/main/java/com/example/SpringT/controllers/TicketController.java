@@ -21,12 +21,14 @@ public class TicketController {
     public ResponseEntity<?> bookTicket(
             @RequestParam Long flightId,
             @RequestParam int row,
-            @RequestParam int seatNumber
+            @RequestParam int seatNumber,
+            @RequestParam String email
     ) {
         try {
-            Ticket ticket = ticketService.createTicket(flightId, row, seatNumber);
+            // Existing seat booking logic
+            Ticket ticket = ticketService.bookTicket(flightId, row, seatNumber, email);
             return ResponseEntity.ok(ticket);
-        } catch (RuntimeException e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

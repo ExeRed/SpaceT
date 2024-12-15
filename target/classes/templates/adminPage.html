@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" href="../static/css/adminPage.css">
     <link rel="stylesheet" href="../static/css/regular.css">
     <link rel="stylesheet" href="../static/css/semibold.css">
+
+
 </head>
 <body>
 
@@ -41,56 +43,186 @@
             </table>
         </div>
 
-
-        <div class="toggle-header" id="statistics-toggle-header">
-            <span class="header-text semibold-text">Statistics</span>
+        <div class="toggle-header" id="flights-toggle-header">
+            <span class="header-text semibold-text">List of Flights</span>
             <i class="arrow-down"></i>
         </div>
-        <div class="statistics-wrapper hidden-table regular-text" id="statistics-wrapper">
-            <p>Current Income: <span th:text="${stats.current_income}"></span></p>
-            <p>Number of Available Seats: <span th:text="${stats.number_of_available_seats}"></span></p>
-            <p>Number of Purchased Tickets: <span th:text="${stats.number_of_purchased_tickets}"></span></p>
-        </div>
-
-
-        <div class="toggle-header" id="tickets-toggle-header">
-            <span class="header-text semibold-text">List of Tickets</span>
-            <i class="arrow-down"></i>
-        </div>
-        <div class="table-wrapper" id="tickets-table-wrapper">
-            <table id="tickets-table" class="styled-table hidden-table regular-text">
+        <div class="table-wrapper" id="flights-table-wrapper">
+            <table id="flights-table" class="styled-table">
                 <thead>
                 <tr>
-
-                    <th>Token</th>
-                    <th>Seat Row</th>
-                    <th>Seat Column</th>
-                    <th>Price</th>
-                    <th></th>
+                    <th>Flight ID</th>
+                    <th>From City</th>
+                    <th>To City</th>
+                    <th>Total Seats</th>
+                    <th>Booked Seats</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr th:each="ticket : ${tickets}">
-                    <td th:text="${ticket.token}"></td>
-                    <td th:text="${ticket.ticket.seat_row}"></td>
-                    <td th:text="${ticket.ticket.seat_column}"></td>
-                    <td th:text="${ticket.ticket.price}"></td>
-                    <td><a th:href="@{/admin/delete/{token}(token=${ticket.token})}">delete</a></td>
-                </tr>
+                <tbody id="flights-table-body">
+                <!-- Rows will be populated dynamically -->
                 </tbody>
             </table>
         </div>
 
-        <div class="upload-form">
-            <p class="file-text regular-text">Make new post in the blog</p>
-            <form method="post" enctype="multipart/form-data" th:action="@{/admin/addFile}">
-                <label for="file-upload" class="custom-file-upload regular-text">
-                    <i class="fas fa-cloud-upload-alt regular-text"></i> Choose File
-                </label>
-                <input id="file-upload" type="file" name="file">
-                <button class="button regular-text" type="submit">Upload</button>
+        <div class="admin-container">
+            <h2>Add New Flight</h2>
+            <form id="addFlightForm">
+                <div class="form-group">
+                    <label for="fromCity">From City</label>
+                    <select id="fromCity" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="toCity">To City</label>
+                    <select id="toCity" required></select>
+                </div>
+                <div class="form-group">
+                    <label for="departureDate">Departure Date</label>
+                    <input type="date" id="departureDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="departureTime">Departure Time</label>
+                    <input type="time" id="departureTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="totalSeats">Total Seats</label>
+                    <input type="number" id="totalSeats" min="1" required>
+                </div>
+                <button type="submit" class="submit-btn">Add Flight</button>
             </form>
+
+            <div id="flightsList">
+                <h3>Existing Flights</h3>
+                <table id="existingFlightsTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody id="existingFlightsBody"></tbody>
+                </table>
+            </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                loadCities();
+                loadExistingFlights();
+
+                document.getElementById('addFlightForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    addFlight();
+                });
+            });
+
+            async function loadCities() {
+                const response = await fetch('/flights/select');
+                const cities = await response.json();
+                const fromCitySelect = document.getElementById('fromCity');
+                const toCitySelect = document.getElementById('toCity');
+
+                fromCitySelect.innerHTML = '';
+                toCitySelect.innerHTML = '';
+
+                cities.forEach(city => {
+                    fromCitySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
+                    toCitySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
+                });
+            }
+
+            async function addFlight() {
+                const fromCityId = document.getElementById('fromCity').value;
+                const toCityId = document.getElementById('toCity').value;
+                const departureDate = document.getElementById('departureDate').value;
+                const departureTime = document.getElementById('departureTime').value;
+                const totalSeats = document.getElementById('totalSeats').value;
+
+                const flightData = {
+                    fromCity: { id: fromCityId },
+                    toCity: { id: toCityId },
+                    departureDate: departureDate,
+                    departureTime: departureTime,
+                    totalSeats: totalSeats
+                };
+
+                try {
+                    const response = await fetch('/admin/flights/add', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(flightData)
+                    });
+
+                    if (response.ok) {
+                        alert('Flight added successfully');
+                        loadExistingFlights();
+                        // Reset form
+                        document.getElementById('addFlightForm').reset();
+                    } else {
+                        alert('Failed to add flight');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred');
+                }
+            }
+
+            async function loadExistingFlights() {
+                try {
+                    const response = await fetch('/admin/flights');
+                    const flights = await response.json();
+                    const tbody = document.getElementById('existingFlightsBody');
+
+                    tbody.innerHTML = '';
+                    flights.forEach(flight => {
+                        const row = `
+                    <tr>
+                        <td>${flight.id}</td>
+                        <td>${flight.fromCity.name}</td>
+                        <td>${flight.toCity.name}</td>
+                        <td>${flight.departureDate}</td>
+
+                    </tr>
+                `;
+                        tbody.innerHTML += row;
+                    });
+                } catch (error) {
+                    console.error('Error loading flights:', error);
+                }
+            }
+
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('/admin/all-flights')
+                    .then(response => response.json())
+                    .then(flights => {
+                        const tableBody = document.getElementById('flights-table-body');
+                        flights.forEach(flightData => {
+                            const flight = flightData.flight;
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                    <td>${flight.id}</td>
+                    <td>${flight.fromCity.name}</td>
+                    <td>${flight.toCity.name}</td>
+                    <td>${flightData.totalSeats}</td>
+                    <td>${flightData.bookedSeats}</td>
+                `;
+                            tableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error fetching flights:', error);
+                    });
+            });
+        </script>
+
+
+
         
     </div>
 

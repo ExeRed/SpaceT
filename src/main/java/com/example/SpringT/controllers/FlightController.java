@@ -10,10 +10,12 @@ import com.example.SpringT.repo.FlightRepository;
 import com.example.SpringT.repo.SeatRepository;
 import com.example.SpringT.repo.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,8 +35,16 @@ public class FlightController {
     }
 
     @GetMapping("/available")
-    public List<Flight> getAvailableFlights(@RequestParam Long fromCityId, @RequestParam Long toCityId) {
-        return flightRepository.findByFromCityIdAndToCityId(fromCityId, toCityId);
+    public List<Flight> getAvailableFlights(
+            @RequestParam Long fromCityId,
+            @RequestParam Long toCityId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate departureDate
+    ) {
+        return flightRepository.findByFromCityIdAndToCityIdAndDepartureDate(
+                fromCityId,
+                toCityId,
+                departureDate
+        );
     }
 
 

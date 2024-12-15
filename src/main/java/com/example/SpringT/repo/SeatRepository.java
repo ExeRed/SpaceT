@@ -1,6 +1,7 @@
 package com.example.SpringT.repo;
 
 
+import com.example.SpringT.models.Flight;
 import com.example.SpringT.models.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
 

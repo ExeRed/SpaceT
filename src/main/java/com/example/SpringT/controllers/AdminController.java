@@ -25,12 +25,6 @@ public class AdminController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-  //  private MainController mainController;
-
-    @Value("${upload.path}")
-    private String uploadPath;
-
     private final TicketRepository ticketRepository;
 
     @Autowired
@@ -39,33 +33,9 @@ public class AdminController {
     }
 
     @GetMapping
-    public String adminPage() {
+    public String adminPage(Model model) {
+        model.addAttribute("users", userRepository.findAll());
         return "adminPage";
-    }
-
-    // Handle file upload and redirect to the admin page
-    @PostMapping("/addFile")
-    public String addFile (@RequestParam("file") MultipartFile file) throws IOException {
-        if (!file.isEmpty() || file.getSize() <= 3 * 1024 * 1024) {
-            File uploadDir = new File(uploadPath);
-
-            if (!uploadDir.exists()) {
-                boolean created = uploadDir.mkdirs();
-                if (!created) {
-                    System.err.println("Unable to create upload directory");
-                }
-            }
-
-            String uuidFile = UUID.randomUUID().toString();
-            String resultFilename = uuidFile + "." + file.getOriginalFilename();
-
-            try {
-                file.transferTo(new File(uploadDir, resultFilename));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return "redirect:/admin";
     }
 
 

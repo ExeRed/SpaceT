@@ -61,20 +61,63 @@
             font-size: 14px;
             color: #000; /* black text */
         }
+
+        .flights-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .flight-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .flight-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flight-item button {
+            padding: 8px 15px;
+        }
+
+        .no-flights, .error-message {
+            text-align: center;
+            color: #666;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .flight-select {
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
     <div id="header"></div>
 
 <div class="container1">
-    <h1>Choose your destination</h1>
+    <div class="flight-select">
+        <h1>Choose your destination</h1>
 
-    <select id="fromCity"></select>
-    <select id="toCity"></select>
-    <input type="date" id="departureDate" style="width: 200px; padding: 8px; border: 1px solid #000; border-radius: 5px; font-size: 14px; color: #000; background-color: #fff;">
-    <button onclick="selectFlight()">Show flights</button>
+        <div>
+            <select id="fromCity"></select>
+            <select id="toCity"></select>
+            <input type="date" id="departureDate" style="width: 200px; padding: 8px; border: 1px solid #000; border-radius: 5px; font-size: 14px; color: #000; background-color: #fff;">
+            <button onclick="selectFlight()">Show flights</button>
+        </div>
 
-    <div id="flights"></div>
+        <div id="flights"></div>
+    </div>
 </div>
 
 <div class="container2">
@@ -114,76 +157,173 @@
 
 <script src="../static/script/headerANDfooter.js"></script>
 <script>
-const today = new Date().toISOString().split("T")[0];
+    document.addEventListener('DOMContentLoaded', function() {
+        const fromCitySelect = document.getElementById('fromCity');
+        const toCitySelect = document.getElementById('toCity');
+        const departureDate = document.getElementById('departureDate');
+        const flightsContainer = document.getElementById('flights');
+        const selectFlightButton = document.querySelector('.container1 button');
 
-// Set the min attribute of the departureDate input to today's date
-document.getElementById("departureDate").setAttribute("min", today);
+        const today = new Date().toISOString().split("T")[0];
+        departureDate.setAttribute("min", today);
 
-    async function loadCities() {
-    const response = await fetch('/flights/select');
-    const cities = await response.json();
-    const fromCitySelect = document.getElementById('fromCity');
-    const toCitySelect = document.getElementById('toCity');
+        let cities = [];
 
-    cities.forEach(city => {
-        const option = `<option value="${city.id}">${city.name}</option>`;
-        fromCitySelect.innerHTML += option;
-        toCitySelect.innerHTML += option;
+        async function loadCities() {
+            try {
+                const response = await fetch('/flights/select');
+                cities = await response.json();
+
+                // Очистка и заполнение селектов городов
+                fromCitySelect.innerHTML = '';
+                toCitySelect.innerHTML = '';
+
+                cities.forEach(city => {
+                    const fromOption = document.createElement('option');
+                    fromOption.value = city.id;
+                    fromOption.textContent = city.name;
+                    fromCitySelect.appendChild(fromOption);
+
+                    const toOption = document.createElement('option');
+                    toOption.value = city.id;
+                    toOption.textContent = city.name;
+                    toCitySelect.appendChild(toOption);
+                });
+
+                // Установка начальных событий
+                setupCityEventListeners();
+            } catch (error) {
+                console.error('Error loading cities:', error);
+            }
+        }
+
+        function setupCityEventListeners() {
+            fromCitySelect.addEventListener('change', updateCityOptions);
+            toCitySelect.addEventListener('change', updateCityOptions);
+        }
+
+        function updateCityOptions() {
+            const fromCityId = fromCitySelect.value;
+            const toCityId = toCitySelect.value;
+
+            // Обновление списка городов для "From"
+            const fromOptions = cities
+                .filter(city => city.id !== toCityId)
+                .map(city => {
+                    const option = document.createElement('option');
+                    option.value = city.id;
+                    option.textContent = city.name;
+                    return option;
+                });
+
+            // Обновление списка городов для "To"
+            const toOptions = cities
+                .filter(city => city.id !== fromCityId)
+                .map(city => {
+                    const option = document.createElement('option');
+                    option.value = city.id;
+                    option.textContent = city.name;
+                    return option;
+                });
+
+            // Сохранение текущих выбранных значений
+            const currentFromCity = fromCitySelect.value;
+            const currentToCity = toCitySelect.value;
+
+            // Очистка и заполнение селектов
+            fromCitySelect.innerHTML = '';
+            toCitySelect.innerHTML = '';
+
+            fromOptions.forEach(option => fromCitySelect.appendChild(option));
+            toOptions.forEach(option => toCitySelect.appendChild(option));
+
+            // Восстановление выбранных значений, если возможно
+            if (fromOptions.some(option => option.value === currentFromCity)) {
+                fromCitySelect.value = currentFromCity;
+            }
+            if (toOptions.some(option => option.value === currentToCity)) {
+                toCitySelect.value = currentToCity;
+            }
+        }
+
+        async function selectFlight() {
+            const fromCityId = fromCitySelect.value;
+            const toCityId = toCitySelect.value;
+            const selectedDate = departureDate.value;
+
+            // Валидация input
+            if (!fromCityId || !toCityId || !selectedDate) {
+                alert('Please, select the cities and data');
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `/flights/available?fromCityId=${fromCityId}&toCityId=${toCityId}&departureDate=${selectedDate}`
+                );
+
+                if (!response.ok) {
+                    throw new Error('Error getting flights');
+                }
+
+                const flights = await response.json();
+
+                // Очистка контейнера полетов
+                flightsContainer.innerHTML = '';
+
+                if (flights.length === 0) {
+                    flightsContainer.innerHTML = `
+                    <div class="no-flights">
+                        <p>Sadly, there's no flights for selected cities and data.</p>
+                    </div>
+                `;
+                    return;
+                }
+
+                // Создание блока с рейсами
+                const flightsWrapper = document.createElement('div');
+                flightsWrapper.className = 'flights-list';
+
+                flights.forEach(flight => {
+                    const flightElement = document.createElement('div');
+                    flightElement.className = 'flight-item';
+                    flightElement.innerHTML = `
+                    <div class="flight-details">
+
+                        <span>Data: ${flight.departureDate}</span>
+                        <span>Time: ${flight.departureTime || 'time not shown yet'}</span>
+                    </div>
+                    <button onclick="viewSeats(${flight.id})">Choose the seat</button>
+                `;
+                    flightsWrapper.appendChild(flightElement);
+                });
+
+                flightsContainer.appendChild(flightsWrapper);
+            } catch (error) {
+                console.error('Error founding flights:', error);
+                flightsContainer.innerHTML = `
+                <div class="error-message">
+                    <p>Error founding flights, try later.</p>
+                </div>
+            `;
+            }
+        }
+
+        function viewSeats(flightId) {
+            window.location.href = `/flight-room.html?flightId=${flightId}`;
+        }
+
+        // Добавление события для кнопки поиска
+        selectFlightButton.addEventListener('click', selectFlight);
+
+        // Загрузка городов при инициализации
+        loadCities();
     });
 
-    // Add event listeners to handle selection changes
-    fromCitySelect.addEventListener('change', () => filterToCityOptions(cities));
-    toCitySelect.addEventListener('change', () => filterFromCityOptions(cities));
-}
-
-function filterToCityOptions(cities) {
-    const fromCityValue = document.getElementById('fromCity').value;
-    const toCitySelect = document.getElementById('toCity');
-
-    toCitySelect.innerHTML = cities
-        .filter(city => city.id !== fromCityValue) // Exclude the selected fromCity
-        .map(city => `<option value="${city.id}">${city.name}</option>`)
-        .join('');
-}
-
-function filterFromCityOptions(cities) {
-    const toCityValue = document.getElementById('toCity').value;
-    const fromCitySelect = document.getElementById('fromCity');
-
-    fromCitySelect.innerHTML = cities
-        .filter(city => city.id !== toCityValue) // Exclude the selected toCity
-        .map(city => `<option value="${city.id}">${city.name}</option>`)
-        .join('');
-}
-
-async function selectFlight() {
-    const fromCityId = document.getElementById('fromCity').value;
-    const toCityId = document.getElementById('toCity').value;
-
-    if (!fromCityId || !toCityId) {
-        alert('Please select both a departure city and a destination.');
-        return;
-    }
-
-    const response = await fetch(`/flights/available?fromCityId=${fromCityId}&toCityId=${toCityId}`);
-    const flights = await response.json();
-
-    const flightsContainer = document.getElementById('flights');
-    flightsContainer.innerHTML = '';
-    flights.forEach(flight => {
-        flightsContainer.innerHTML += `<button onclick="viewSeats(${flight.id})">Flight ${flight.id}</button>`;
-    });
-}
-
-// Call the loadCities function when the page loads
-document.addEventListener('DOMContentLoaded', loadCities);
-
-
-    async function viewSeats(flightId) {
+    // Глобальная функция для совместимости
+    function viewSeats(flightId) {
         window.location.href = `/flight-room.html?flightId=${flightId}`;
     }
-
-    loadCities();
 </script>
 
 
