@@ -8,6 +8,7 @@ import com.example.SpringT.repo.EmailRepository;
 import com.example.SpringT.repo.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,7 +74,7 @@ public class MainController {
 
 
     @GetMapping({"/", "/main"})
-    public String main() {
+    public String main(){
         return "main";
     }
 
