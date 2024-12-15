@@ -175,7 +175,7 @@ button:hover {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background-color: #f9f9f9; /* Фон таблицы */
+    background-color: #000000; /* Фон таблицы */
 }
 
 .admin-container th,
@@ -192,9 +192,9 @@ button:hover {
 }
 
 .admin-container tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* Полосатый стиль */
+    background-color: #000000; /* Полосатый стиль */
 }
 
 .admin-container tbody tr:hover {
-    background-color: #e6f7ff; /* Подсветка строки */
+    background-color: #121212; /* Подсветка строки */
 }
